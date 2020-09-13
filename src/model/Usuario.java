@@ -7,11 +7,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
+@NamedQueries({
+	@NamedQuery(name="Usuario.findAll", 
+			query="SELECT u FROM Usuario u"),
+	
+	@NamedQuery(name="Usuario.findUsuarioSenha", 
+			query="SELECT u FROM Usuario u WHERE u.usuario = :usuario AND u.senha = :senha")
+})
 
 @Entity
+@Table(name="usuario")
 public class Usuario implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -27,6 +43,18 @@ public class Usuario implements Serializable{
 	
 	@Column
 	private boolean permissao;
+	
+	
+
+	public Usuario() {
+	}
+
+	public Usuario(String usuario, String senha, int idFuncionario, boolean permissao) {
+		this.usuario = usuario;
+		this.senha = senha;
+		this.idFuncionario = idFuncionario;
+		this.permissao = permissao;
+	}
 
 	public String getUsuario() {
 		return usuario;

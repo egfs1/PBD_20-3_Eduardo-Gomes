@@ -1,31 +1,28 @@
 package dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import model.Funcionario;
-import model.Pessoa;
 
 public class FuncionarioDAO {
 	
-	private EntityManagerFactory emf;
 	private EntityManager em;
 	
 	public FuncionarioDAO() {
-		this.emf = Persistence.createEntityManagerFactory("SistemaEniatusPU");
-
 	}
 	
-	public void persist(Funcionario f) {
+	public void persist(Funcionario f, EntityManagerFactory emf) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = emf.createEntityManager();
 			em.getTransaction().begin(); 
-			//regras de negócio de persistência aqui
+			//regras de negï¿½cio de persistï¿½ncia aqui
 	
 			em.persist(f);
 			em.getTransaction().commit();
-			System.out.println("deu certo");
 		} catch (Exception e) {
 			e.printStackTrace();
 			em.getTransaction().rollback();
@@ -34,9 +31,9 @@ public class FuncionarioDAO {
 		}
 	}
 	
-	public void merge(Funcionario f) {
+	public void merge(Funcionario f, EntityManagerFactory emf) {
 		try {
-			this.em = this.emf.createEntityManager();
+			this.em = emf.createEntityManager();
 			
 			em.getTransaction().begin();
 			em.merge(f);
@@ -51,9 +48,9 @@ public class FuncionarioDAO {
 		}
 	}
 	
-	public void remove(Funcionario f) {
+	public void remove(Funcionario f, EntityManagerFactory emf) {
 		try {
-			this.em = this.emf.createEntityManager();
+			this.em = emf.createEntityManager();
 			
 			em.getTransaction().begin();
 			em.remove(f);
@@ -68,9 +65,9 @@ public class FuncionarioDAO {
 		}
 	}
 	
-	public Funcionario find(int id) {
+	public Funcionario find(int id, EntityManagerFactory emf) {
 		try {
-			this.em = this.emf.createEntityManager();
+			this.em = emf.createEntityManager();
 			
 			Funcionario funcionario = em.find(Funcionario.class, id);
 			if (funcionario!=null) {
@@ -85,7 +82,21 @@ public class FuncionarioDAO {
 		return null;
 	}
 	
-//	public ArrayList<> findAll() {
-//
-//	}
+	public List<Object> findAll(EntityManagerFactory emf){
+		try {
+			this.em = emf.createEntityManager();
+			
+			Query query = em.createNamedQuery("Usuario.findAll");
+			List<Object> list = query.getResultList();
+			if (list!=null) {
+				em.close();
+				return list;
+			}		
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		em.close();
+		return null;
+	}
 }

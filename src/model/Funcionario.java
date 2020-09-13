@@ -8,8 +8,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+@NamedQueries({
+	@NamedQuery(name="Funcionario.findAll", 
+			query="SELECT f FROM Funcionario f")
+})
 
 @Entity
+@Table(name="funcionario")
 public class Funcionario  implements Serializable{
 	
 	/**
@@ -25,7 +34,7 @@ public class Funcionario  implements Serializable{
 	private ArrayList<String>papeis; //papeis: administrador, contador, funcionario(?)
 	
 	@Column
-	private String tipo;   //tipo: mensalista, 40 horas semanais; horista, horas à definir
+	private String tipo;   //tipo: mensalista, 40 horas semanais; horista, horas ï¿½ definir
 	
 	@Column
 	private int horasSemanaisContratadas;
@@ -46,14 +55,20 @@ public class Funcionario  implements Serializable{
 	public ArrayList<String> getPapeis() {
 		return papeis;
 	}
+	
+	
 
-	public Funcionario(Long id, ArrayList<String> papeis, String tipo, int horasSemanaisContratadas, int idPessoa) {
-	this.id = id;
-	this.papeis = papeis;
-	this.tipo = tipo;
-	this.horasSemanaisContratadas = horasSemanaisContratadas;
-	this.idPessoa = idPessoa;
-}
+	public Funcionario() {
+	}
+
+
+
+	public Funcionario(ArrayList<String> papeis, String tipo, int horasSemanaisContratadas, int idPessoa) {
+            this.papeis = papeis;
+            this.tipo = tipo;
+            this.horasSemanaisContratadas = horasSemanaisContratadas;
+            this.idPessoa = idPessoa;
+        }
 
 	public void setPapeis(ArrayList<String> papeis) {
 		this.papeis = papeis;

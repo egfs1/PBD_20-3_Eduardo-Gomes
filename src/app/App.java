@@ -1,14 +1,18 @@
 package app;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Date;
 
-import dao.PessoaDAO;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import controller.ControllerTela;
+import dao.GenericDAO;
 import model.Pessoa;
+import model.Usuario;
 
 public class App {
+	
+	
 	
 //	public static synchronized void getConnectionInstance() {
 //        try {
@@ -28,9 +32,27 @@ public class App {
 //    }
 
 	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			UIManager.setLookAndFeel ("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		Pessoa p = new Pessoa("Eduardo", "Brasileiro", 0, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()));
-		PessoaDAO dao = new PessoaDAO();
-		dao.persist(p);
+		GenericDAO.persist(p);
+		Usuario u = new Usuario("admin", "admin", 0, true);
+		GenericDAO.persist(u);
+		
+		ControllerTela.initTela();
 		
 		
 	}

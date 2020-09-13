@@ -1,30 +1,28 @@
 package dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import model.Pessoa;
 
 public class PessoaDAO {
 	
-	private EntityManagerFactory emf;
 	private EntityManager em;
 	
 	public PessoaDAO() {
-		this.emf = Persistence.createEntityManagerFactory("SistemaEniatusPU");
-
 	}
 	
-	public void persist(Pessoa p) {
+	public void persist(Pessoa p, EntityManagerFactory emf) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = emf.createEntityManager();
 			em.getTransaction().begin(); 
-			//regras de negócio de persistência aqui
+			//regras de negï¿½cio de persistï¿½ncia aqui
 	
 			em.persist(p);
 			em.getTransaction().commit();
-			System.out.println("deu certo");
 		} catch (Exception e) {
 			e.printStackTrace();
 			em.getTransaction().rollback();
@@ -32,4 +30,74 @@ public class PessoaDAO {
 			em.close(); 
 		}
 	}
+	
+	public void merge(Pessoa p, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			
+			em.getTransaction().begin();
+			em.merge(p);
+			em.getTransaction().commit();
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			em.getTransaction().rollback();
+		} finally {
+			em.close();
+		}
+	}
+	
+	public void remove(Pessoa p, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			
+			em.getTransaction().begin();
+			em.remove(p);
+			em.getTransaction().commit();
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			em.getTransaction().rollback();
+		} finally {
+			em.close();
+		}
+	}
+	
+	public Pessoa find(int id, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			
+			Pessoa pessoa = em.find(Pessoa.class, id);
+			if (pessoa!=null) {
+				em.close();
+				return pessoa;
+			}		
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		em.close();
+		return null;
+	}
+	
+	public List<Object> findAll(EntityManagerFactory emf){
+		try {
+			this.em = emf.createEntityManager();
+			
+			Query query = em.createNamedQuery("Pessoa.findAll");
+			List<Object> list = query.getResultList();
+			if (list!=null) {
+				em.close();
+				return list;
+			}		
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		em.close();
+		return null;
+	}
+	
 }

@@ -8,9 +8,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
+@NamedQueries({
+	@NamedQuery(name="Pessoa.findAll", 
+			query="SELECT p FROM Pessoa p")
+})
 
 @Entity
+@Table(name="pessoa")
 public class Pessoa implements Serializable{
 	
 	/**
@@ -36,6 +44,11 @@ public class Pessoa implements Serializable{
 	
 	@Column
 	private Date dataAdmissao;
+	
+	
+	
+	public Pessoa() {
+	}
 
 	public Pessoa(String nome, String naturalidade, int qntFilhos, Date dataNascimento, Date dataAdmissao) {
 		this.nome = nome;

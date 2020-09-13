@@ -1,31 +1,27 @@
 package dao;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.Query;
 
-import model.Pessoa;
 import model.Usuario;
 
 public class UsuarioDAO {
 	
-	private EntityManagerFactory emf;
 	private EntityManager em;
 	
 	public UsuarioDAO() {
-		this.emf = Persistence.createEntityManagerFactory("SistemaEniatusPU");
-
 	}
 	
-	public void persist(Usuario u) {
+	public void persist(Usuario u, EntityManagerFactory emf) {
 		try{
-			this.em = this.emf.createEntityManager();
+			this.em = emf.createEntityManager();
 			em.getTransaction().begin(); 
-			//regras de negócio de persistência aqui
+			//regras de negï¿½cio de persistï¿½ncia aqui
 	
 			em.persist(u);
 			em.getTransaction().commit();
-			System.out.println("deu certo");
 		} catch (Exception e) {
 			e.printStackTrace();
 			em.getTransaction().rollback();
@@ -34,9 +30,9 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public void merge(Usuario u) {
+	public void merge(Usuario u, EntityManagerFactory emf) {
 		try {
-			this.em = this.emf.createEntityManager();
+			this.em = emf.createEntityManager();
 			
 			em.getTransaction().begin();
 			em.merge(u);
@@ -51,9 +47,9 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public void remove(Usuario u) {
+	public void remove(Usuario u, EntityManagerFactory emf) {
 		try {
-			this.em = this.emf.createEntityManager();
+			this.em = emf.createEntityManager();
 			
 			em.getTransaction().begin();
 			em.remove(u);
@@ -68,9 +64,9 @@ public class UsuarioDAO {
 		}
 	}
 	
-	public Usuario find(int id) {
+	public Usuario find(int id, EntityManagerFactory emf) {
 		try {
-			this.em = this.emf.createEntityManager();
+			this.em = emf.createEntityManager();
 			
 			Usuario usuario = em.find(Usuario.class, id);
 			if (usuario!=null) {
@@ -85,7 +81,40 @@ public class UsuarioDAO {
 		return null;
 	}
 	
-//	public ArrayList<> findAll() {
-//
-//	}
+	public List<Object> findAll(EntityManagerFactory emf){
+		try {
+			this.em = emf.createEntityManager();
+			
+			Query query = em.createNamedQuery("Usuario.findAll");
+			List<Object> list = query.getResultList();
+			if (list!=null) {
+				em.close();
+				return list;
+			}		
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		em.close();
+		return null;
+	}
+	
+	public boolean verificarLogin(String usuario, String senha, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			Query query = em.createNamedQuery("Usuario.findUsuarioSenha", Usuario.class);
+			query.setParameter("usuario", usuario);
+			query.setParameter("senha", senha);
+			Usuario u = (Usuario) query.getSingleResult();
+			if (u.isPermissao()) {
+				em.close();
+				return true;
+			}	
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		em.close();
+		return false;
+	}
 }
