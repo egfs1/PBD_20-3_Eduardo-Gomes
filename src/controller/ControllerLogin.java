@@ -25,8 +25,9 @@ public class ControllerLogin {
 				String usuario = tela.getTextFieldUsuario().getText().intern();
 				String senha = tela.getTextFieldSenha().getText().intern();
 				
-				if (GenericDAO.getPdao().verificarLogin(usuario, senha, GenericDAO.getEmf())) {
-					ControllerTela.setPanel(new PanelDashboardAdministrador());
+				Long id = GenericDAO.getPdao().verificarLogin(usuario, senha, GenericDAO.getEmf());
+				if (id!=0) {
+					ControllerTela.setPanel(new PanelDashboardAdministrador(id));
 					System.gc();
 				}
 			}

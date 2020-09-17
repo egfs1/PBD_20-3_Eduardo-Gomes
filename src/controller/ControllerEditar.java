@@ -11,7 +11,10 @@ import view.PanelEditar;
 
 public class ControllerEditar {
 	
+	private PanelEditar tela;
+	
 	public ControllerEditar(PanelEditar tela) {
+		this.tela = tela;
 		
 		tela.getRdbtnTipoHorista().addActionListener(new ActionListener() {
 			
@@ -74,10 +77,10 @@ public class ControllerEditar {
 				String senha = tela.getPessoa().getSenha();
 				
 				if (funcao!="Comum") {
-					validarPessoaUsuario(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, usuario, senha, tela);
+					validarPessoaUsuario(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, usuario, senha);
 				}
 				else {
-					validarPessoaComum(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, tela);
+					validarPessoaComum(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString);
 				}
 			}
 		});
@@ -87,7 +90,7 @@ public class ControllerEditar {
 	
 	private void validarPessoaUsuario(String nome, String naturalidade, String qntFilhos, String dataNascimento, Date dataAdmissao,
 			boolean sindicalizado, String funcao, String tipo, String horasSemanaisContratadas, String usuario,
-			String senha, PanelEditar tela) {
+			String senha) {
 		SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
 		
 		if (nome=="" || naturalidade == "" || usuario=="" || qntFilhos=="" || !(dataNascimento.length()==10) || horasSemanaisContratadas=="") {
@@ -112,6 +115,13 @@ public class ControllerEditar {
 			return;
 		}
 		
+		System.out.println(usuario);
+		if (!tela.getPessoa().getUsuario().equalsIgnoreCase(usuario) && GenericDAO.getPdao().existeUsuario(usuario, GenericDAO.getEmf())) {
+			JOptionPane.showMessageDialog(null, "Esse nome de usuario já existe!");
+			return;
+		}
+		
+		
 		Pessoa p = new Pessoa(nome, naturalidade, newQntFilhos, newDataNascimento, dataAdmissao, sindicalizado, funcao, tipo, newHorasSemanais, usuario, senha);
 		p.setId(tela.getPessoa().getId());
 		GenericDAO.getPdao().merge(p, GenericDAO.getEmf());
@@ -119,7 +129,7 @@ public class ControllerEditar {
 	}
 	
 	private void validarPessoaComum(String nome, String naturalidade, String qntFilhos, String dataNascimento, Date dataAdmissao,
-			boolean sindicalizado, String funcao, String tipo, String horasSemanaisContratadas, PanelEditar tela) {
+			boolean sindicalizado, String funcao, String tipo, String horasSemanaisContratadas) {
 		SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
 		
 		if (nome=="" || naturalidade == "" || qntFilhos=="" || !(dataNascimento.length()==10) || horasSemanaisContratadas=="") {

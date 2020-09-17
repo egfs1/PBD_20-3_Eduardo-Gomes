@@ -1,13 +1,8 @@
 package dao;
 
-import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
-import model.Funcionario;
-import model.Pessoa;
-import model.Usuario;
 
 public class GenericDAO {
 	

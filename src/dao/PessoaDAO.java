@@ -16,19 +16,25 @@ public class PessoaDAO {
 	public PessoaDAO() {
 	}
 	
-	public void persist(Pessoa p, EntityManagerFactory emf) {
+	public boolean persist(Pessoa p, EntityManagerFactory emf) {
 		try{
-			this.em = emf.createEntityManager();
-			em.getTransaction().begin(); 
+			this.em = emf.createEntityManager(); 
 			//regras de negï¿½cio de persistï¿½ncia aqui
-	
-			em.persist(p);
-			em.getTransaction().commit();
+			if (existeUsuario(p.getUsuario(), emf)) {
+				em.getTransaction().begin();
+				em.persist(p);
+				em.getTransaction().commit();
+				em.close();
+				return true;
+			}
+			else {
+				em.close();
+				return false;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			em.getTransaction().rollback();
-		} finally {
-			em.close(); 
+			return false;
 		}
 	}
 	
@@ -99,45 +105,44 @@ public class PessoaDAO {
 		return null;
 	}
 	
-	public boolean verificarLogin(String usuario, String senha, EntityManagerFactory emf) {
+	public Long verificarLogin(String usuario, String senha, EntityManagerFactory emf) {
 		try {
 			this.em = emf.createEntityManager();
-			Query query = em.createNamedQuery("Pessoa.findUsuarioSenha", Pessoa.class);
+			Query query = em.createNamedQuery("Pessoa.findIDByUsuarioANDSenha", Long.class);
 			query.setParameter("usuario", usuario);
 			query.setParameter("senha", senha);
-			Pessoa p = (Pessoa) query.getSingleResult();
+			Long id = (Long) query.getSingleResult();
 			em.close();
-			return true;	
+			return id;	
 		}
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Usuario/Senha inválidos!");
 			e.printStackTrace();
 		}
 		em.close();
-		return false;
+		return (long) 0;
 	}
 	
-	public Pessoa findUsuario(String usuario, EntityManagerFactory emf) {
+	public boolean existeUsuario(String usuario, EntityManagerFactory emf) {
 		try {
 			this.em = emf.createEntityManager();
-			Query query = em.createNamedQuery("Pessoa.findUsuario", Pessoa.class);
+			Query query = em.createNamedQuery("Pessoa.existeUsuario", Pessoa.class);
 			query.setParameter("usuario", usuario);
-			Pessoa pessoa = (Pessoa) query.getSingleResult();
-			em.close();
-			return pessoa;	
+			boolean existe = query.getResultList().size() > 0;
+			return existe;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 		em.close();
-		return null;
+		return false;
 	}
 	
 	
-	public Pessoa findUsuarioID(String input, EntityManagerFactory emf) {
+	public Pessoa findUsuarioORID(String input, EntityManagerFactory emf) {
 		try {
 			this.em = emf.createEntityManager();
-			Query query = em.createNamedQuery("Pessoa.findUsuarioID", Pessoa.class);
+			Query query = em.createNamedQuery("Pessoa.findUsuarioORID", Pessoa.class);
 			
 			Long inputID=(long) 0;
 			try {

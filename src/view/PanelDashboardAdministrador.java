@@ -19,11 +19,14 @@ public class PanelDashboardAdministrador extends JPanel {
 	
 	private JMenuItem mntmDeslogar, mntmSair, mntmCadastrarFuncionario, mntmEditar, mntmResetarSenha;
 	private JPanel panel;
-
+	private Long IDPessoa;
+	
 	/**
 	 * Create the panel.
 	 */
-	public PanelDashboardAdministrador() {
+	public PanelDashboardAdministrador(Long id) {
+		this.IDPessoa = id;
+		
 		setBackground(SystemColor.inactiveCaption);
 		setLayout(null);
 		
@@ -97,6 +100,10 @@ public class PanelDashboardAdministrador extends JPanel {
 
 	public JMenuItem getMntmResetarSenha() {
 		return mntmResetarSenha;
+	}
+
+	public Long getIDPessoa() {
+		return IDPessoa;
 	}
 
 	public void mudarPanel(JPanel panel) {

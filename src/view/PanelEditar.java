@@ -160,9 +160,6 @@ public class PanelEditar extends JPanel {
 		rdbtnTipoMensalista.setBounds(618, 152, 141, 23);
 		add(rdbtnTipoMensalista);
 		
-		if (pessoa.getTipo()=="Horista")rdbtnTipoHorista.setSelected(true);
-		else rdbtnTipoMensalista.setSelected(true);
-		
 		JLabel lblHoras = new JLabel("Horas Semanais");
 		lblHoras.setForeground(Color.WHITE);
 		lblHoras.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 16));
@@ -179,6 +176,11 @@ public class PanelEditar extends JPanel {
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		if (pessoa.getTipo().equalsIgnoreCase("Horista"))rdbtnTipoHorista.setSelected(true);
+		else {
+			rdbtnTipoMensalista.setSelected(true);
+			formattedTextFieldHoras.setEnabled(false);
 		}
 		
 		JLabel lblUsuario = new JLabel("Nome de Usuario");

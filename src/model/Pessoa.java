@@ -16,13 +16,13 @@ import javax.persistence.Table;
 	@NamedQuery(name="Pessoa.findAll", 
 			query="SELECT p FROM Pessoa p"),
 	
-	@NamedQuery(name="Pessoa.findUsuarioSenha", 
-	query="SELECT p FROM Pessoa p WHERE p.usuario = :usuario AND p.senha = :senha"),
+	@NamedQuery(name="Pessoa.findIDByUsuarioANDSenha", 
+	query="SELECT p.id FROM Pessoa p WHERE p.usuario = :usuario AND p.senha = :senha"),
 	
-	@NamedQuery(name="Pessoa.findUsuario",
-	query="SELECT p from Pessoa p WHERE p.usuario = :usuario"),
+	@NamedQuery(name="Pessoa.existeUsuario",
+	query="SELECT p FROM Pessoa p WHERE p.usuario = :usuario"),
 	
-	@NamedQuery(name="Pessoa.findUsuarioID",
+	@NamedQuery(name="Pessoa.findUsuarioORID",
 	query="SELECT p from Pessoa p WHERE p.usuario = :usuario OR p.id = :id")
 })
 
@@ -204,6 +204,99 @@ public class Pessoa implements Serializable{
 
 	public void setFuncao(String funcao) {
 		this.funcao = funcao;
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dataAdmissao == null) ? 0 : dataAdmissao.hashCode());
+		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
+		result = prime * result + ((funcao == null) ? 0 : funcao.hashCode());
+		result = prime * result + horasSemanaisContratadas;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((naturalidade == null) ? 0 : naturalidade.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + qntFilhos;
+		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
+		result = prime * result + (sindicalizado ? 1231 : 1237);
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pessoa other = (Pessoa) obj;
+		if (dataAdmissao == null) {
+			if (other.dataAdmissao != null)
+				return false;
+		} else if (!dataAdmissao.equals(other.dataAdmissao))
+			return false;
+		if (dataNascimento == null) {
+			if (other.dataNascimento != null)
+				return false;
+		} else if (!dataNascimento.equals(other.dataNascimento))
+			return false;
+		if (funcao == null) {
+			if (other.funcao != null)
+				return false;
+		} else if (!funcao.equals(other.funcao))
+			return false;
+		if (horasSemanaisContratadas != other.horasSemanaisContratadas)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (naturalidade == null) {
+			if (other.naturalidade != null)
+				return false;
+		} else if (!naturalidade.equals(other.naturalidade))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (qntFilhos != other.qntFilhos)
+			return false;
+		if (senha == null) {
+			if (other.senha != null)
+				return false;
+		} else if (!senha.equals(other.senha))
+			return false;
+		if (sindicalizado != other.sindicalizado)
+			return false;
+		if (tipo == null) {
+			if (other.tipo != null)
+				return false;
+		} else if (!tipo.equals(other.tipo))
+			return false;
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
+			return false;
+		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Pessoa [id=" + id + ", nome=" + nome + ", naturalidade=" + naturalidade + ", qntFilhos=" + qntFilhos
+				+ ", dataNascimento=" + dataNascimento + ", dataAdmissao=" + dataAdmissao + ", sindicalizado="
+				+ sindicalizado + ", funcao=" + funcao + ", tipo=" + tipo + ", horasSemanaisContratadas="
+				+ horasSemanaisContratadas + ", usuario=" + usuario + ", senha=" + senha + "]";
 	}
 	
 	

@@ -48,7 +48,7 @@ public class ControllerDashboardAdministrador {
 				String input = JOptionPane.showInputDialog(null, "Digite o ID ou o nome de usuario", "Editar Funcionário", JOptionPane.QUESTION_MESSAGE);
 				if (input==null)return;
 				
-				Pessoa buscarUsuario = GenericDAO.getPdao().findUsuarioID(input, GenericDAO.getEmf());
+				Pessoa buscarUsuario = GenericDAO.getPdao().findUsuarioORID(input, GenericDAO.getEmf());
 				if (buscarUsuario!=null) {
 					tela.mudarPanel(new PanelEditar(buscarUsuario));
 					System.gc();

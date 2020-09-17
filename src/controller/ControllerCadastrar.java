@@ -159,9 +159,10 @@ public class ControllerCadastrar {
 		}
 		
 		Pessoa p = new Pessoa(nome, naturalidade, newQntFilhos, newDataNascimento, dataAdmissao, sindicalizado, funcao, tipo, newHorasSemanais, usuario, senha);
-		GenericDAO.getPdao().persist(p, GenericDAO.getEmf());
-		JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!\n Nome de usuario: " + usuario + "\n Senha: " + senha + "\n certifique-se de copiar a senha antes de apertar OK!");
-		limparCampos(tela);
+		if (GenericDAO.getPdao().persist(p, GenericDAO.getEmf())) {
+			JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!\n Nome de usuario: " + usuario + "\n Senha: " + senha + "\n certifique-se de copiar a senha antes de apertar OK!");
+			limparCampos(tela);
+		}else JOptionPane.showMessageDialog(null, "Esse nome de usuario já existe!");
 	}
 	
 	private void validarPessoaComum(String nome, String naturalidade, String qntFilhos, String dataNascimento, Date dataAdmissao,
@@ -191,9 +192,10 @@ public class ControllerCadastrar {
 		}
 		
 		Pessoa p = new Pessoa(nome, naturalidade, newQntFilhos, newDataNascimento, dataAdmissao, sindicalizado, funcao, tipo, newHorasSemanais);
-		GenericDAO.getPdao().persist(p, GenericDAO.getEmf());
-		JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
-		limparCampos(tela);
+		if (GenericDAO.getPdao().persist(p, GenericDAO.getEmf())){
+			JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
+			limparCampos(tela);
+		} else JOptionPane.showMessageDialog(null, "Esse nome de usuario já existe!");
 	}
 	
 	private void limparCampos(PanelCadastro tela) {
