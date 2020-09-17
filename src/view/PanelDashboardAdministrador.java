@@ -17,7 +17,8 @@ public class PanelDashboardAdministrador extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JMenuItem mntmDeslogar, mntmSair;
+	private JMenuItem mntmDeslogar, mntmSair, mntmCadastrarFuncionario, mntmEditar, mntmResetarSenha;
+	private JPanel panel;
 
 	/**
 	 * Create the panel.
@@ -29,7 +30,7 @@ public class PanelDashboardAdministrador extends JPanel {
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setToolTipText("");
 		menuBar.setBorderPainted(false);
-		menuBar.setBounds(0, 0, 799, 32);
+		menuBar.setBounds(0, 0, 800, 32);
 		menuBar.setBackground(SystemColor.activeCaption);
 		menuBar.setLayout(null);
 		add(menuBar);
@@ -39,10 +40,19 @@ public class PanelDashboardAdministrador extends JPanel {
 		mnCadastro.setBounds(0,0,100, 32);
 		menuBar.add(mnCadastro);
 		
+		mntmCadastrarFuncionario = new JMenuItem("Cadastrar Funcionario");
+		mnCadastro.add(mntmCadastrarFuncionario);
+		
 		JMenu mnEditar = new JMenu("Editar");
 		mnEditar.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
 		mnEditar.setBounds(100,0,100, 32);
 		menuBar.add(mnEditar);
+		
+		mntmEditar = new JMenuItem("Editar Funcionario");
+		mnEditar.add(mntmEditar);
+		
+		mntmResetarSenha = new JMenuItem("Resetar Senha");
+		mnEditar.add(mntmResetarSenha);
 		
 		JMenu mnTabelas = new JMenu("Tabelas");
 		mnTabelas.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
@@ -66,8 +76,6 @@ public class PanelDashboardAdministrador extends JPanel {
 		mnOpcoes.add(mntmSair);
 		
 		new ControllerDashboardAdministrador(this);
-		setVisible(true);
-
 	}
 
 	public JMenuItem getMntmDeslogar() {
@@ -77,7 +85,29 @@ public class PanelDashboardAdministrador extends JPanel {
 	public JMenuItem getMntmSair() {
 		return mntmSair;
 	}
+
+	public JMenuItem getMntmCadastrarFuncionario() {
+		return mntmCadastrarFuncionario;
+	}
 	
-	
-	
+
+	public JMenuItem getMntmEditar() {
+		return mntmEditar;
+	}
+
+	public JMenuItem getMntmResetarSenha() {
+		return mntmResetarSenha;
+	}
+
+	public void mudarPanel(JPanel panel) {
+		if (this.panel!=null) {
+			this.remove(this.panel);
+			this.panel = null;
+			System.gc();
+		}
+		this.panel = panel;
+		this.add(this.panel);
+		this.repaint();
+		System.gc();
+	}
 }

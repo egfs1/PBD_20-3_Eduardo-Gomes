@@ -9,11 +9,7 @@ import view.PanelLogin;
 
 public class ControllerLogin {
 	
-	private PanelLogin tela;
-
 	public ControllerLogin(PanelLogin tela) {
-		this.tela = tela;
-		
 		tela.getBtnSair().addActionListener(new ActionListener() {
 			
 			@Override
@@ -26,11 +22,12 @@ public class ControllerLogin {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String usuario = tela.getTextFieldSenha().getText().intern();
+				String usuario = tela.getTextFieldUsuario().getText().intern();
 				String senha = tela.getTextFieldSenha().getText().intern();
 				
-				if (GenericDAO.getUdao().verificarLogin(usuario, senha, GenericDAO.getEmf())) {
+				if (GenericDAO.getPdao().verificarLogin(usuario, senha, GenericDAO.getEmf())) {
 					ControllerTela.setPanel(new PanelDashboardAdministrador());
+					System.gc();
 				}
 			}
 		});

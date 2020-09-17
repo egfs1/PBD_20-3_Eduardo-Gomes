@@ -47,10 +47,8 @@ public class App {
 			e.printStackTrace();
 		}
 		
-		Pessoa p = new Pessoa("Eduardo", "Brasileiro", 0, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()));
-		GenericDAO.persist(p);
-		Usuario u = new Usuario("admin", "admin", 0, true);
-		GenericDAO.persist(u);
+//		Pessoa p = new Pessoa("eduardo", "brasileiro", 0, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), false, "Administrador", "Mensalista", 40, "admin", "admin");
+//		GenericDAO.getPdao().persist(p, GenericDAO.getEmf());
 		
 		ControllerTela.initTela();
 		

@@ -14,16 +14,22 @@ import javax.persistence.Table;
 
 @NamedQueries({
 	@NamedQuery(name="Pessoa.findAll", 
-			query="SELECT p FROM Pessoa p")
+			query="SELECT p FROM Pessoa p"),
+	
+	@NamedQuery(name="Pessoa.findUsuarioSenha", 
+	query="SELECT p FROM Pessoa p WHERE p.usuario = :usuario AND p.senha = :senha"),
+	
+	@NamedQuery(name="Pessoa.findUsuario",
+	query="SELECT p from Pessoa p WHERE p.usuario = :usuario"),
+	
+	@NamedQuery(name="Pessoa.findUsuarioID",
+	query="SELECT p from Pessoa p WHERE p.usuario = :usuario OR p.id = :id")
 })
 
 @Entity
 @Table(name="pessoa")
 public class Pessoa implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -45,18 +51,62 @@ public class Pessoa implements Serializable{
 	@Column
 	private Date dataAdmissao;
 	
+	@Column
+	private boolean sindicalizado;
+	
+	@Column
+	private String funcao; //papeis: administrador, contador, funcionario(?)
+	
+	@Column
+	private String tipo;   //tipo: mensalista, 40 horas semanais; horista, horas � definir
+	
+	@Column
+	private int horasSemanaisContratadas;
+	
+	@Column
+	private String usuario;
+	
+	@Column
+	private String senha;
+	
 	
 	
 	public Pessoa() {
 	}
-
-	public Pessoa(String nome, String naturalidade, int qntFilhos, Date dataNascimento, Date dataAdmissao) {
+	
+	
+	// Contrutor para adm e contador
+	public Pessoa(String nome, String naturalidade, int qntFilhos, Date dataNascimento, Date dataAdmissao,
+			boolean sindicalizado, String funcao, String tipo, int horasSemanaisContratadas, String usuario,
+			String senha) {
 		this.nome = nome;
 		this.naturalidade = naturalidade;
 		this.qntFilhos = qntFilhos;
 		this.dataNascimento = dataNascimento;
 		this.dataAdmissao = dataAdmissao;
+		this.sindicalizado = sindicalizado;
+		this.funcao = funcao;
+		this.tipo = tipo;
+		this.horasSemanaisContratadas = horasSemanaisContratadas;
+		this.usuario = usuario;
+		this.senha = senha;
 	}
+	
+	// contrutor para funcionario comum
+	public Pessoa(String nome, String naturalidade, int qntFilhos, Date dataNascimento, Date dataAdmissao,
+			boolean sindicalizado, String funcao, String tipo, int horasSemanaisContratadas) {
+		this.nome = nome;
+		this.naturalidade = naturalidade;
+		this.qntFilhos = qntFilhos;
+		this.dataNascimento = dataNascimento;
+		this.dataAdmissao = dataAdmissao;
+		this.sindicalizado = sindicalizado;
+		this.funcao = funcao;
+		this.tipo = tipo;
+		this.horasSemanaisContratadas = horasSemanaisContratadas;
+	}
+
+
 
 	public String getNome() {
 		return nome;
@@ -98,62 +148,62 @@ public class Pessoa implements Serializable{
 		this.dataAdmissao = dataAdmissao;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dataAdmissao == null) ? 0 : dataAdmissao.hashCode());
-		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((naturalidade == null) ? 0 : naturalidade.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + qntFilhos;
-		return result;
+	public Long getId() {
+		return id;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pessoa other = (Pessoa) obj;
-		if (dataAdmissao == null) {
-			if (other.dataAdmissao != null)
-				return false;
-		} else if (!dataAdmissao.equals(other.dataAdmissao))
-			return false;
-		if (dataNascimento == null) {
-			if (other.dataNascimento != null)
-				return false;
-		} else if (!dataNascimento.equals(other.dataNascimento))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (naturalidade == null) {
-			if (other.naturalidade != null)
-				return false;
-		} else if (!naturalidade.equals(other.naturalidade))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (qntFilhos != other.qntFilhos)
-			return false;
-		return true;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "Pessoa [id=" + id + ", nome=" + nome + ", naturalidade=" + naturalidade + ", qntFilhos=" + qntFilhos
-				+ ", dataNascimento=" + dataNascimento + ", dataAdmissao=" + dataAdmissao + "]";
+	public boolean isSindicalizado() {
+		return sindicalizado;
+	}
+
+	public void setSindicalizado(boolean sindicalizado) {
+		this.sindicalizado = sindicalizado;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public int getHorasSemanaisContratadas() {
+		return horasSemanaisContratadas;
+	}
+
+	public void setHorasSemanaisContratadas(int horasSemanaisContratadas) {
+		this.horasSemanaisContratadas = horasSemanaisContratadas;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getFuncao() {
+		return funcao;
+	}
+
+
+
+	public void setFuncao(String funcao) {
+		this.funcao = funcao;
 	}
 	
 	
