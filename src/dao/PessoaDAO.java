@@ -20,7 +20,7 @@ public class PessoaDAO {
 		try{
 			this.em = emf.createEntityManager(); 
 			//regras de neg�cio de persist�ncia aqui
-			if (existeUsuario(p.getUsuario(), emf)) {
+			if (!existeUsuario(p.getUsuario(), emf)) {
 				em.getTransaction().begin();
 				em.persist(p);
 				em.getTransaction().commit();

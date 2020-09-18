@@ -80,7 +80,6 @@ public class ControllerCadastrar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String charactersSenha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-				
 				boolean allButtonsSelected=true;
 				
 				

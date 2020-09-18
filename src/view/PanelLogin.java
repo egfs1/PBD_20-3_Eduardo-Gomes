@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.SystemColor;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -20,6 +21,7 @@ public class PanelLogin extends JPanel {
 	private JTextField textFieldUsuario;
 	private JTextField textFieldSenha;
 	private JButton btnLogin, btnSair;
+	private JLabel lblEsqueceuSenha;
 
 	/**
 	 * Create the panel.
@@ -71,14 +73,22 @@ public class PanelLogin extends JPanel {
 		btnLogin = new JButton("Login");
 		btnLogin.setBackground(Color.WHITE);
 		btnLogin.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
-		btnLogin.setBounds(10, 310, 120, 40);
+		btnLogin.setBounds(10, 349, 120, 40);
 		panel.add(btnLogin);
 		
 		btnSair = new JButton("Sair");
 		btnSair.setBackground(Color.WHITE);
 		btnSair.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
-		btnSair.setBounds(160, 310, 120, 40);
+		btnSair.setBounds(170, 349, 120, 40);
 		panel.add(btnSair);
+		
+		lblEsqueceuSenha = new JLabel("Esqueceu sua senha?");
+		lblEsqueceuSenha.setHorizontalAlignment(SwingConstants.LEFT);
+		lblEsqueceuSenha.setForeground(Color.WHITE);
+		lblEsqueceuSenha.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblEsqueceuSenha.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
+		lblEsqueceuSenha.setBounds(83, 265, 134, 21);
+		panel.add(lblEsqueceuSenha);
 		
 		new ControllerLogin(this);
 		setVisible(true);
@@ -99,6 +109,9 @@ public class PanelLogin extends JPanel {
 	public JTextField getTextFieldSenha() {
 		return textFieldSenha;
 	}
-	
+
+	public JLabel getLblEsqueceuSenha() {
+		return lblEsqueceuSenha;
+	}
 	
 }

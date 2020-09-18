@@ -3,8 +3,7 @@
   <persistence-unit name="SistemaEniatus" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <class>model.Pessoa</class>
-    <class>model.Funcionario</class>
-    <class>model.Usuario</class>
+    <class>model.RequestResetSenha</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5433/SistemaEniatus"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
