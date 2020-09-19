@@ -115,12 +115,15 @@ public class ControllerEditar {
 			return;
 		}
 		
-		System.out.println(usuario);
 		if (!tela.getPessoa().getUsuario().equalsIgnoreCase(usuario) && GenericDAO.getPdao().existeUsuario(usuario, GenericDAO.getEmf())) {
 			JOptionPane.showMessageDialog(null, "Esse nome de usuario já existe!");
 			return;
 		}
 		
+		if (usuario.length()<6 || usuario.length() > 11) {
+			JOptionPane.showMessageDialog(null, "Nome de usuario precisa ter entre 6 e 11 caracteres!");
+			return;
+		}
 		
 		Pessoa p = new Pessoa(nome, naturalidade, newQntFilhos, newDataNascimento, dataAdmissao, sindicalizado, funcao, tipo, newHorasSemanais, usuario, senha);
 		p.setId(tela.getPessoa().getId());

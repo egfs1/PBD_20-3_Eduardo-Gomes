@@ -19,7 +19,7 @@ import javax.persistence.Table;
 	@NamedQuery(name="Pessoa.findIDByUsuarioANDSenha", 
 	query="SELECT p.id FROM Pessoa p WHERE p.usuario = :usuario AND p.senha = :senha"),
 	
-	@NamedQuery(name="Pessoa.existeUsuario",
+	@NamedQuery(name="Pessoa.findUsuario",
 	query="SELECT p FROM Pessoa p WHERE p.usuario = :usuario"),
 	
 	@NamedQuery(name="Pessoa.findUsuarioORID",

@@ -72,7 +72,7 @@ public class PessoaDAO {
 		}
 	}
 	
-	public Pessoa findID(int id, EntityManagerFactory emf) {
+	public Pessoa findID(Long id, EntityManagerFactory emf) {
 		try {
 			this.em = emf.createEntityManager();
 			
@@ -126,7 +126,7 @@ public class PessoaDAO {
 	public boolean existeUsuario(String usuario, EntityManagerFactory emf) {
 		try {
 			this.em = emf.createEntityManager();
-			Query query = em.createNamedQuery("Pessoa.existeUsuario", Pessoa.class);
+			Query query = em.createNamedQuery("Pessoa.findUsuario", Pessoa.class);
 			query.setParameter("usuario", usuario);
 			boolean existe = query.getResultList().size() > 0;
 			return existe;

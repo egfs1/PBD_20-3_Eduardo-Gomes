@@ -17,7 +17,7 @@ public class PanelDashboardAdministrador extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JMenuItem mntmDeslogar, mntmSair, mntmCadastrarFuncionario, mntmEditar, mntmResetarSenha;
+	private JMenuItem mntmDeslogar, mntmSair, mntmCadastrarFuncionario, mntmEditar, mntmResetarSenha, mntmMeuPerfil;
 	private JPanel panel;
 	private Long IDPessoa;
 	
@@ -53,6 +53,9 @@ public class PanelDashboardAdministrador extends JPanel {
 		
 		mntmEditar = new JMenuItem("Editar Funcionario");
 		mnEditar.add(mntmEditar);
+		
+		mntmMeuPerfil = new JMenuItem("Meu Perfil");
+		mnEditar.add(mntmMeuPerfil);
 		
 		mntmResetarSenha = new JMenuItem("Resetar Senha");
 		mnEditar.add(mntmResetarSenha);
@@ -104,6 +107,10 @@ public class PanelDashboardAdministrador extends JPanel {
 
 	public Long getIDPessoa() {
 		return IDPessoa;
+	}
+
+	public JMenuItem getMntmMeuPerfil() {
+		return mntmMeuPerfil;
 	}
 
 	public void mudarPanel(JPanel panel) {

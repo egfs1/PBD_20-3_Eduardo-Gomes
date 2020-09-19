@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import dao.GenericDAO;
+import model.Criptografar;
 import view.PanelDashboardAdministrador;
 import view.PanelEsqueceuSenha;
 import view.PanelLogin;
@@ -29,7 +30,7 @@ public class ControllerLogin {
 				String usuario = tela.getTextFieldUsuario().getText().intern();
 				String senha = tela.getTextFieldSenha().getText().intern();
 				
-				Long id = GenericDAO.getPdao().verificarLogin(usuario, senha, GenericDAO.getEmf());
+				Long id = GenericDAO.getPdao().verificarLogin(usuario, Criptografar.criptografar(senha), GenericDAO.getEmf());
 				if (id!=0) {
 					ControllerTela.setPanel(new PanelDashboardAdministrador(id));
 					System.gc();

@@ -1,6 +1,8 @@
 package view;
 
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.SystemColor;
@@ -19,7 +21,7 @@ public class PanelLogin extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField textFieldUsuario;
-	private JTextField textFieldSenha;
+	private JPasswordField textFieldSenha;
 	private JButton btnLogin, btnSair;
 	private JLabel lblEsqueceuSenha;
 
@@ -64,7 +66,7 @@ public class PanelLogin extends JPanel {
 		lblSenha.setBounds(10, 192, 270, 21);
 		panel.add(lblSenha);
 		
-		textFieldSenha = new JTextField();
+		textFieldSenha = new JPasswordField();
 		textFieldSenha.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 16));
 		textFieldSenha.setColumns(10);
 		textFieldSenha.setBounds(10, 224, 280, 30);
@@ -106,7 +108,7 @@ public class PanelLogin extends JPanel {
 		return textFieldUsuario;
 	}
 
-	public JTextField getTextFieldSenha() {
+	public JPasswordField getTextFieldSenha() {
 		return textFieldSenha;
 	}
 

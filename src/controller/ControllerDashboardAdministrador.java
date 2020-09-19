@@ -8,10 +8,12 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import dao.GenericDAO;
+import model.Criptografar;
 import model.Pessoa;
 import view.PanelCadastro;
 import view.PanelDashboardAdministrador;
 import view.PanelEditar;
+import view.PanelEditarPerfil;
 import view.PanelLogin;
 
 public class ControllerDashboardAdministrador {
@@ -76,7 +78,7 @@ public class ControllerDashboardAdministrador {
 					if (GenericDAO.getRdao().remove(buscarUsuario.getId(), GenericDAO.getEmf())) {
 						String charactersSenha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 						String senhaGerada = RandomStringUtils.random( 8, charactersSenha );
-						buscarUsuario.setSenha(senhaGerada);
+						buscarUsuario.setSenha(Criptografar.criptografar(senhaGerada));
 						GenericDAO.getPdao().merge(buscarUsuario, GenericDAO.getEmf());
 						
 						JOptionPane.showMessageDialog(null, "Senha alterada com sucesso!\n" + "Nova Senha: " + senhaGerada + "\nCertifique-se de copiar a senha antes de apertar OK!");
@@ -89,6 +91,15 @@ public class ControllerDashboardAdministrador {
 				}
 				
 				JOptionPane.showMessageDialog(null, "Não foi encontrado nenhum funcionário com esse ID/Nome de usuario!");
+			}
+		});
+		
+		tela.getMntmMeuPerfil().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tela.mudarPanel(new PanelEditarPerfil(GenericDAO.getPdao().findID(tela.getIDPessoa(), GenericDAO.getEmf())));
+				System.gc();
 			}
 		});
 		
