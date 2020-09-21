@@ -4,10 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
+
+import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
 import model.Criptografar;
+import model.Pessoa;
 import view.PanelDashboardAdministrador;
 import view.PanelEsqueceuSenha;
 import view.PanelLogin;
@@ -28,12 +30,22 @@ public class ControllerLogin {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String usuario = tela.getTextFieldUsuario().getText().intern();
+				@SuppressWarnings("deprecation")
 				String senha = tela.getTextFieldSenha().getText().intern();
 				
-				Long id = GenericDAO.getPdao().verificarLogin(usuario, Criptografar.criptografar(senha), GenericDAO.getEmf());
-				if (id!=0) {
-					ControllerTela.setPanel(new PanelDashboardAdministrador(id));
-					System.gc();
+				Pessoa pessoa = GenericDAO.getPdao().verificarLogin(usuario, Criptografar.criptografar(senha), GenericDAO.getEmf());
+				if (pessoa!=null) {
+					System.out.println("a");
+					if (pessoa.getFuncao().equalsIgnoreCase("Administrador")) {
+						System.out.println("b");
+						ControllerTela.setPanel(new PanelDashboardAdministrador(pessoa.getId()));
+						System.gc();
+					}
+					
+					if (pessoa.getFuncao().equalsIgnoreCase("Contador")) {
+						System.out.println("c");
+						JOptionPane.showMessageDialog(null, "Tela do contador não foi criada!");
+					}
 				}
 			}
 		});

@@ -88,39 +88,39 @@ public class PessoaDAO {
 		return null;
 	}
 	
-	public List<Object> findAll(EntityManagerFactory emf){
+	public List<Pessoa> findAll(EntityManagerFactory emf){
 		try {
 			this.em = emf.createEntityManager();
 			
-			Query query = em.createNamedQuery("Pessoa.findAll");
+			Query query = em.createNamedQuery("Pessoa.findAll", Pessoa.class);
 			@SuppressWarnings("unchecked")
-			List<Object> list = query.getResultList();
+			List<Pessoa> list = query.getResultList();
 			em.close();
 			return list;	
 		}
 		catch (Exception e) {
+			em.close();
 			e.printStackTrace();
 		}
 		em.close();
 		return null;
 	}
 	
-	public Long verificarLogin(String usuario, String senha, EntityManagerFactory emf) {
+	public Pessoa verificarLogin(String usuario, String senha, EntityManagerFactory emf) {
 		try {
 			this.em = emf.createEntityManager();
-			Query query = em.createNamedQuery("Pessoa.findIDByUsuarioANDSenha", Long.class);
+			Query query = em.createNamedQuery("Pessoa.findByUsuarioANDSenha", Pessoa.class);
 			query.setParameter("usuario", usuario);
 			query.setParameter("senha", senha);
-			Long id = (Long) query.getSingleResult();
+			Pessoa pessoa = (Pessoa) query.getSingleResult();
 			em.close();
-			return id;	
+			return pessoa;	
 		}
 		catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Usuario/Senha inválidos!");
-			e.printStackTrace();
 		}
 		em.close();
-		return (long) 0;
+		return null;
 	}
 	
 	public boolean existeUsuario(String usuario, EntityManagerFactory emf) {
@@ -132,7 +132,6 @@ public class PessoaDAO {
 			return existe;
 		}
 		catch (Exception e) {
-			e.printStackTrace();
 		}
 		em.close();
 		return false;

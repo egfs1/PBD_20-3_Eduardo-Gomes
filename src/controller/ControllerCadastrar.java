@@ -158,11 +158,6 @@ public class ControllerCadastrar {
 			return;
 		}
 		
-		if (usuario.length()<6 || usuario.length() > 11) {
-			JOptionPane.showMessageDialog(null, "Nome de usuario precisa ter entre 6 e 11 caracteres!");
-			return;
-		}
-		
 		Pessoa p = new Pessoa(nome, naturalidade, newQntFilhos, newDataNascimento, dataAdmissao, sindicalizado, funcao, tipo, newHorasSemanais, usuario, Criptografar.criptografar(senha));
 		if (GenericDAO.getPdao().persist(p, GenericDAO.getEmf())) {
 			JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!\n Nome de usuario: " + usuario + "\n Senha: " + senha + "\n certifique-se de copiar a senha antes de apertar OK!");

@@ -2,7 +2,6 @@ package view;
 
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.SystemColor;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -12,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 import controller.ControllerEsqueceuSenha;
-import controller.ControllerLogin;
 
 public class PanelEsqueceuSenha extends JPanel {
 	/**

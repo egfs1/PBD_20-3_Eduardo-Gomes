@@ -40,8 +40,12 @@ public class ControllerEditar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja deletar esse funcionário da base de dados?", "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE)==0) {
-					GenericDAO.getPdao().remove(tela.getPessoa(), GenericDAO.getEmf());
-					JOptionPane.showMessageDialog(null, "Funcionário deletado com sucesso!");
+					if (!(tela.getPessoa().getId()==tela.getIdUser())) {
+						GenericDAO.getPdao().remove(tela.getPessoa(), GenericDAO.getEmf());
+						JOptionPane.showMessageDialog(null, "Funcionário deletado com sucesso!");
+					}else {
+						JOptionPane.showMessageDialog(null, "Você não pode deletar o usuario que está usando!");
+					}
 				}
 			}
 		});
@@ -117,11 +121,6 @@ public class ControllerEditar {
 		
 		if (!tela.getPessoa().getUsuario().equalsIgnoreCase(usuario) && GenericDAO.getPdao().existeUsuario(usuario, GenericDAO.getEmf())) {
 			JOptionPane.showMessageDialog(null, "Esse nome de usuario já existe!");
-			return;
-		}
-		
-		if (usuario.length()<6 || usuario.length() > 11) {
-			JOptionPane.showMessageDialog(null, "Nome de usuario precisa ter entre 6 e 11 caracteres!");
 			return;
 		}
 		

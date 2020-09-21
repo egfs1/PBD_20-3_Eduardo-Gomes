@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
 import model.Pessoa;
-import view.PanelDashboardAdministrador;
 import view.PanelEsqueceuSenha;
 import view.PanelLogin;
 

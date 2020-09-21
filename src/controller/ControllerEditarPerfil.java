@@ -7,8 +7,6 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import dao.GenericDAO;
 import model.Criptografar;
-import model.Pessoa;
-import view.PanelEditar;
 import view.PanelEditarPerfil;
 
 public class ControllerEditarPerfil {
@@ -78,16 +76,16 @@ public class ControllerEditarPerfil {
 			return;
 		}
 		
-		if (usuario.length()<6 || usuario.length() > 11) {
-			JOptionPane.showMessageDialog(null, "Nome de usuario precisa ter entre 6 e 11 caracteres!");
-			return;
-		}
-		
 		if (novaSenha!="" || novaSenha2!="") {
 			if(novaSenha!=novaSenha2) {
 				JOptionPane.showMessageDialog(null, "As senhas estão diferentes!");
 				return;
 			}
+		}
+		
+		if (novaSenha.length()<6 || novaSenha.length() > 11) {
+			JOptionPane.showMessageDialog(null, "A senha precisa ter entre 6 e 11 caracteres!");
+			return;
 		}
 		
 		tela.getPessoa().setNome(nome);

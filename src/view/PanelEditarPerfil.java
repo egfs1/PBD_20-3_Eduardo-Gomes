@@ -12,14 +12,12 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
-import controller.ControllerEditar;
 import controller.ControllerEditarPerfil;
 import model.Pessoa;
 
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
-import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.ButtonGroup;
 

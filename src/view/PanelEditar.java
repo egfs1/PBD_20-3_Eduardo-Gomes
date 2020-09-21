@@ -35,11 +35,12 @@ public class PanelEditar extends JPanel {
 	private final ButtonGroup buttonGroup_2 = new ButtonGroup();
 	
 	private Pessoa pessoa;
-
+	private Long idUser;
 	/**
 	 * Create the panel.
 	 */
-	public PanelEditar(Pessoa pessoa) {
+	public PanelEditar(Pessoa pessoa, Long idUser) {
+		this.idUser = idUser;
 		this.pessoa = pessoa;
 		
 		setBackground(SystemColor.activeCaption);
@@ -290,6 +291,11 @@ public class PanelEditar extends JPanel {
 		return pessoa;
 	}
 
+	public Long getIdUser() {
+		return idUser;
+	}
+	
+	
 	
 	
 }

@@ -17,7 +17,7 @@ public class PanelDashboardAdministrador extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JMenuItem mntmDeslogar, mntmSair, mntmCadastrarFuncionario, mntmEditar, mntmResetarSenha, mntmMeuPerfil;
+	private JMenuItem mntmDeslogar, mntmSair, mntmCadastrarFuncionario, mntmEditar, mntmResetarSenha, mntmMeuPerfil, mntmTabelaPessoas;
 	private JPanel panel;
 	private Long IDPessoa;
 	
@@ -65,6 +65,9 @@ public class PanelDashboardAdministrador extends JPanel {
 		mnTabelas.setBounds(200,0,100, 32);
 		menuBar.add(mnTabelas);
 		
+		mntmTabelaPessoas = new JMenuItem("Tabela de Funcionarios");
+		mnTabelas.add(mntmTabelaPessoas);
+		
 		JMenu mnOpcoes = new JMenu("Op\u00E7\u00F5es");
 		mnOpcoes.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
 		mnOpcoes.setBounds(300,0,100, 32);
@@ -111,6 +114,12 @@ public class PanelDashboardAdministrador extends JPanel {
 
 	public JMenuItem getMntmMeuPerfil() {
 		return mntmMeuPerfil;
+	}
+	
+	
+
+	public JMenuItem getMntmTabelaPessoas() {
+		return mntmTabelaPessoas;
 	}
 
 	public void mudarPanel(JPanel panel) {

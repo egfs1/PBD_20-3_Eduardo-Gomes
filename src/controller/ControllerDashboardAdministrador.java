@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -10,11 +11,13 @@ import org.apache.commons.lang3.RandomStringUtils;
 import dao.GenericDAO;
 import model.Criptografar;
 import model.Pessoa;
+import tabelamodelos.TabelaPessoaModel;
 import view.PanelCadastro;
 import view.PanelDashboardAdministrador;
 import view.PanelEditar;
 import view.PanelEditarPerfil;
 import view.PanelLogin;
+import view.PanelTabela;
 
 public class ControllerDashboardAdministrador {
 	
@@ -54,7 +57,7 @@ public class ControllerDashboardAdministrador {
 				
 				Pessoa buscarUsuario = GenericDAO.getPdao().findUsuarioORID(input, GenericDAO.getEmf());
 				if (buscarUsuario!=null) {
-					tela.mudarPanel(new PanelEditar(buscarUsuario));
+					tela.mudarPanel(new PanelEditar(buscarUsuario, tela.getIDPessoa()));
 					System.gc();
 					return;
 				}
@@ -99,6 +102,18 @@ public class ControllerDashboardAdministrador {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				tela.mudarPanel(new PanelEditarPerfil(GenericDAO.getPdao().findID(tela.getIDPessoa(), GenericDAO.getEmf())));
+				System.gc();
+			}
+		});
+		
+		tela.getMntmTabelaPessoas().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TabelaPessoaModel tableModel = new TabelaPessoaModel();
+				List<Pessoa> dados = GenericDAO.getPdao().findAll(GenericDAO.getEmf());
+				tableModel.setDados(dados);
+				tela.mudarPanel(new PanelTabela(tableModel, "Funcionários", Pessoa.columnsSize()));
 				System.gc();
 			}
 		});
