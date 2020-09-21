@@ -35,15 +35,12 @@ public class ControllerLogin {
 				
 				Pessoa pessoa = GenericDAO.getPdao().verificarLogin(usuario, Criptografar.criptografar(senha), GenericDAO.getEmf());
 				if (pessoa!=null) {
-					System.out.println("a");
 					if (pessoa.getFuncao().equalsIgnoreCase("Administrador")) {
-						System.out.println("b");
 						ControllerTela.setPanel(new PanelDashboardAdministrador(pessoa.getId()));
 						System.gc();
 					}
 					
 					if (pessoa.getFuncao().equalsIgnoreCase("Contador")) {
-						System.out.println("c");
 						JOptionPane.showMessageDialog(null, "Tela do contador não foi criada!");
 					}
 				}
