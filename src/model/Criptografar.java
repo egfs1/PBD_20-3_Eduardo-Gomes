@@ -16,7 +16,6 @@ public class Criptografar {
 			retorno = hash.toString(16);
 			
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return retorno;

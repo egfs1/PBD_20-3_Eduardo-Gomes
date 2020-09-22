@@ -38,9 +38,6 @@ public class PanelEditarPerfil extends JPanel {
 	private JPasswordField textFieldSenha;
 	private JPasswordField textFieldSenha2;
 
-	/**
-	 * Create the panel.
-	 */
 	public PanelEditarPerfil(Pessoa pessoa) {
 		this.pessoa = pessoa;
 		
@@ -112,7 +109,6 @@ public class PanelEditarPerfil extends JPanel {
 			formattedTextFieldFilhos.setBounds(20, 390, 90, 30);
 			add(formattedTextFieldFilhos);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

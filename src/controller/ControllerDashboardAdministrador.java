@@ -10,6 +10,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import dao.GenericDAO;
 import model.Criptografar;
+import model.GerarSenha;
 import model.Pessoa;
 import tabelamodelos.TabelaPessoaModel;
 import view.PanelCadastro;
@@ -22,6 +23,7 @@ import view.PanelTabela;
 public class ControllerDashboardAdministrador {
 	
 	public ControllerDashboardAdministrador(PanelDashboardAdministrador tela) {
+		
 		tela.getMntmSair().addActionListener(new ActionListener() {
 			
 			@Override
@@ -75,12 +77,13 @@ public class ControllerDashboardAdministrador {
 				String input = JOptionPane.showInputDialog(null, "Digite o ID ou o nome de usuario", "Resetar Senha", JOptionPane.QUESTION_MESSAGE);
 				if (input==null)return;
 				
-				
 				Pessoa buscarUsuario = GenericDAO.getPdao().findUsuarioORID(input, GenericDAO.getEmf());
+				
 				if (buscarUsuario!=null) {
 					if (GenericDAO.getRdao().remove(buscarUsuario.getId(), GenericDAO.getEmf())) {
-						String charactersSenha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-						String senhaGerada = RandomStringUtils.random( 8, charactersSenha );
+						
+						String senhaGerada = GerarSenha.gerarSenha(8);
+						
 						buscarUsuario.setSenha(Criptografar.criptografar(senhaGerada));
 						GenericDAO.getPdao().merge(buscarUsuario, GenericDAO.getEmf());
 						

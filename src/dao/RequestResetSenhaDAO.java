@@ -83,7 +83,6 @@ public class RequestResetSenhaDAO {
 			return request;
 		}
 		catch (Exception e) {
-			e.printStackTrace();
 			em.close();
 			return null;
 		}

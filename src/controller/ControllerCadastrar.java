@@ -3,19 +3,14 @@ package controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JFormattedTextField;
-import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import org.apache.commons.lang3.RandomStringUtils;
 
-import dao.GenericDAO;
-import model.Criptografar;
-import model.Pessoa;
+import auth.AuthCadastrarPessoa;
 import view.PanelCadastro;
 
 public class ControllerCadastrar {
@@ -80,7 +75,6 @@ public class ControllerCadastrar {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String charactersSenha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 				boolean allButtonsSelected=true;
 				
 				
@@ -118,84 +112,15 @@ public class ControllerCadastrar {
 				
 				if(allButtonsSelected) {
 					if (funcao!="Comum") {
-						String senhaGerada = RandomStringUtils.random( 8, charactersSenha );
-						validarPessoaUsuario(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, usuario, senhaGerada, tela);
+						AuthCadastrarPessoa.authPessoaUsuario(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, usuario);
 					}
 					else {
-						validarPessoaComum(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, tela);
+						AuthCadastrarPessoa.authPessoaComum(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString);
 					}
+					limparCampos(tela);
 				}
 			}
 		});
-		
-		
-	}
-	
-	private void validarPessoaUsuario(String nome, String naturalidade, String qntFilhos, String dataNascimento, Date dataAdmissao,
-			boolean sindicalizado, String funcao, String tipo, String horasSemanaisContratadas, String usuario,
-			String senha, PanelCadastro tela) {
-		SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
-		
-		if (nome=="" || naturalidade == "" || usuario=="" || qntFilhos=="" || !(dataNascimento.length()==10) || horasSemanaisContratadas=="") {
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente");
-			return;
-		}
-		
-		Date newDataNascimento = null;
-		int newQntFilhos;
-		int newHorasSemanais;
-		try {
-			newQntFilhos = Integer.parseInt(qntFilhos);
-			newHorasSemanais = Integer.parseInt(horasSemanaisContratadas);
-			newDataNascimento = DateFor.parse(dataNascimento);
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente");
-			return;
-		}
-		
-		if (dataAdmissao.before(newDataNascimento)) {
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente");
-			return;
-		}
-		
-		Pessoa p = new Pessoa(nome, naturalidade, newQntFilhos, newDataNascimento, dataAdmissao, sindicalizado, funcao, tipo, newHorasSemanais, usuario, Criptografar.criptografar(senha));
-		if (GenericDAO.getPdao().persist(p, GenericDAO.getEmf())) {
-			JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!\n Nome de usuario: " + usuario + "\n Senha: " + senha + "\n certifique-se de copiar a senha antes de apertar OK!");
-			limparCampos(tela);
-		}else JOptionPane.showMessageDialog(null, "Esse nome de usuario já existe!");
-	}
-	
-	private void validarPessoaComum(String nome, String naturalidade, String qntFilhos, String dataNascimento, Date dataAdmissao,
-			boolean sindicalizado, String funcao, String tipo, String horasSemanaisContratadas, PanelCadastro tela) {
-		SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
-		
-		if (nome=="" || naturalidade == "" || qntFilhos=="" || !(dataNascimento.length()==10) || horasSemanaisContratadas=="") {
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente");
-			return;
-		}
-		
-		Date newDataNascimento = null;
-		int newQntFilhos;
-		int newHorasSemanais;
-		try {
-			newQntFilhos = Integer.parseInt(qntFilhos);
-			newHorasSemanais = Integer.parseInt(horasSemanaisContratadas);
-			newDataNascimento = DateFor.parse(dataNascimento);
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente");
-			return;
-		}
-		
-		if (dataAdmissao.before(newDataNascimento)) {
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente");
-			return;
-		}
-		
-		Pessoa p = new Pessoa(nome, naturalidade, newQntFilhos, newDataNascimento, dataAdmissao, sindicalizado, funcao, tipo, newHorasSemanais);
-		if (GenericDAO.getPdao().persist(p, GenericDAO.getEmf())){
-			JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
-			limparCampos(tela);
-		} else JOptionPane.showMessageDialog(null, "Esse nome de usuario já existe!");
 	}
 	
 	private void limparCampos(PanelCadastro tela) {

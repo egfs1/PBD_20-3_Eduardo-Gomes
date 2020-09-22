@@ -2,19 +2,16 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+
+import auth.AuthEditarPessoa;
 import dao.GenericDAO;
-import model.Pessoa;
 import view.PanelEditar;
 
 public class ControllerEditar {
 	
-	private PanelEditar tela;
-	
 	public ControllerEditar(PanelEditar tela) {
-		this.tela = tela;
 		
 		tela.getRdbtnTipoHorista().addActionListener(new ActionListener() {
 			
@@ -81,85 +78,12 @@ public class ControllerEditar {
 				String senha = tela.getPessoa().getSenha();
 				
 				if (funcao!="Comum") {
-					validarPessoaUsuario(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, usuario, senha);
+					AuthEditarPessoa.authPessoaUsuario(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, usuario, senha, tela);
 				}
 				else {
-					validarPessoaComum(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString);
+					AuthEditarPessoa.authPessoaComum(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, tela);
 				}
 			}
 		});
-		
-		
 	}
-	
-	private void validarPessoaUsuario(String nome, String naturalidade, String qntFilhos, String dataNascimento, Date dataAdmissao,
-			boolean sindicalizado, String funcao, String tipo, String horasSemanaisContratadas, String usuario,
-			String senha) {
-		SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
-		
-		if (nome=="" || naturalidade == "" || usuario=="" || qntFilhos=="" || !(dataNascimento.length()==10) || horasSemanaisContratadas=="") {
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente");
-			return;
-		}
-		
-		Date newDataNascimento = null;
-		int newQntFilhos;
-		int newHorasSemanais;
-		try {
-			newQntFilhos = Integer.parseInt(qntFilhos);
-			newHorasSemanais = Integer.parseInt(horasSemanaisContratadas);
-			newDataNascimento = DateFor.parse(dataNascimento);
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente");
-			return;
-		}
-		
-		if (dataAdmissao.before(newDataNascimento)) {
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente");
-			return;
-		}
-		
-		if (!tela.getPessoa().getUsuario().equalsIgnoreCase(usuario) && GenericDAO.getPdao().existeUsuario(usuario, GenericDAO.getEmf())) {
-			JOptionPane.showMessageDialog(null, "Esse nome de usuario já existe!");
-			return;
-		}
-		
-		Pessoa p = new Pessoa(nome, naturalidade, newQntFilhos, newDataNascimento, dataAdmissao, sindicalizado, funcao, tipo, newHorasSemanais, usuario, senha);
-		p.setId(tela.getPessoa().getId());
-		GenericDAO.getPdao().merge(p, GenericDAO.getEmf());
-		JOptionPane.showMessageDialog(null, "Informações alteradas com sucesso!");
-	}
-	
-	private void validarPessoaComum(String nome, String naturalidade, String qntFilhos, String dataNascimento, Date dataAdmissao,
-			boolean sindicalizado, String funcao, String tipo, String horasSemanaisContratadas) {
-		SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
-		
-		if (nome=="" || naturalidade == "" || qntFilhos=="" || !(dataNascimento.length()==10) || horasSemanaisContratadas=="") {
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente");
-			return;
-		}
-		
-		Date newDataNascimento = null;
-		int newQntFilhos;
-		int newHorasSemanais;
-		try {
-			newQntFilhos = Integer.parseInt(qntFilhos);
-			newHorasSemanais = Integer.parseInt(horasSemanaisContratadas);
-			newDataNascimento = DateFor.parse(dataNascimento);
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente");
-			return;
-		}
-		
-		if (dataAdmissao.before(newDataNascimento)) {
-			JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente");
-			return;
-		}
-		
-		Pessoa p = new Pessoa(nome, naturalidade, newQntFilhos, newDataNascimento, dataAdmissao, sindicalizado, funcao, tipo, newHorasSemanais);
-		p.setId(tela.getPessoa().getId());
-		GenericDAO.getPdao().merge(p, GenericDAO.getEmf());
-		JOptionPane.showMessageDialog(null, "Informações alteradas com sucesso!");
-	}
-	
 }
