@@ -13,6 +13,10 @@ public class TabelaPessoaModel extends AbstractTableModel {
 	private List<Pessoa> dados = new ArrayList<>();
 	private String[] colunas = {"ID", "Nome", "Naturalidade", "N° Filhos", "Data de Nascimento", "Data de Admissão", "Sindicalizado", "Função", "Tipo", "Horas Semanais", "Usuario", "Senha"};
 	
+	public TabelaPessoaModel(List<Pessoa> dados) {
+		this.dados = dados;
+		this.fireTableDataChanged();
+	}
 	
 	@Override
 	public String getColumnName(int column) {
@@ -77,10 +81,4 @@ public class TabelaPessoaModel extends AbstractTableModel {
 		this.dados.add(p);
 		this.fireTableDataChanged();
 	}
-	
-	public void setDados(List<Pessoa> dados) {
-		this.dados = dados;
-		this.fireTableDataChanged();
-	}
-
 }

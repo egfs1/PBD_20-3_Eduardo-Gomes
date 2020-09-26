@@ -9,6 +9,12 @@ public class GenericDAO {
 	private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("SistemaEniatus");
 	private static PessoaDAO pdao = new PessoaDAO();
 	private static RequestResetSenhaDAO rdao = new RequestResetSenhaDAO();
+	private static TabelaSalarioMinimoDAO tsmdao = new TabelaSalarioMinimoDAO();
+	private static TabelaSalarioFamiliaDAO tsfdao = new TabelaSalarioFamiliaDAO();
+	private static ValoresINSSDAO vinssdao = new ValoresINSSDAO();
+	private static TabelaINSSDAO tinssdao = new TabelaINSSDAO();
+	private static ValoresIRRFDAO virrfdao = new ValoresIRRFDAO();
+	private static TabelaIRRFDAO tirrfdao = new TabelaIRRFDAO();
 	
 	public static EntityManagerFactory getEmf() {
 		return emf;
@@ -21,6 +27,31 @@ public class GenericDAO {
 	public static RequestResetSenhaDAO getRdao() {
 		return rdao;
 	}
+
+	public static TabelaSalarioMinimoDAO getTsmdao() {
+		return tsmdao;
+	}
+
+	public static TabelaSalarioFamiliaDAO getTsfdao() {
+		return tsfdao;
+	}
+
+	public static ValoresINSSDAO getVinssdao() {
+		return vinssdao;
+	}
+
+	public static TabelaINSSDAO getTinssdao() {
+		return tinssdao;
+	}
+
+	public static ValoresIRRFDAO getVirrfdao() {
+		return virrfdao;
+	}
+
+	public static TabelaIRRFDAO getTirrfdao() {
+		return tirrfdao;
+	}
+	
 	
 
 	

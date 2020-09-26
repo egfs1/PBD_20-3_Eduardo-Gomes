@@ -6,10 +6,8 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
-import model.Criptografar;
 import model.Pessoa;
 import view.PanelEditar;
-import view.PanelEditarPerfil;
 
 public class AuthEditarPessoa {
 	

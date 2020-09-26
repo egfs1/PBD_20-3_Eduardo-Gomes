@@ -17,10 +17,9 @@ public class PessoaDAO {
 	}
 	
 	public boolean persist(Pessoa p, EntityManagerFactory emf) {
-		try{
-			this.em = emf.createEntityManager(); 
-			//regras de neg�cio de persist�ncia aqui
+		try{ 
 			if (!existeUsuario(p.getUsuario(), emf)) {
+				this.em = emf.createEntityManager();
 				em.getTransaction().begin();
 				em.persist(p);
 				em.getTransaction().commit();
@@ -129,9 +128,11 @@ public class PessoaDAO {
 			Query query = em.createNamedQuery("Pessoa.findUsuario", Pessoa.class);
 			query.setParameter("usuario", usuario);
 			boolean existe = query.getResultList().size() > 0;
+			em.close();
 			return existe;
 		}
 		catch (Exception e) {
+			em.close();
 		}
 		em.close();
 		return false;
@@ -156,7 +157,6 @@ public class PessoaDAO {
 			return pessoa;	
 		}
 		catch (Exception e) {
-			e.printStackTrace();
 		}
 		em.close();
 		return null;

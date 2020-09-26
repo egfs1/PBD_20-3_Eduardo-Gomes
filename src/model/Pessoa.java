@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @NamedQueries({
 	@NamedQuery(name="Pessoa.findAll", 
-			query="SELECT p FROM Pessoa p"),
+			query="SELECT p FROM Pessoa p ORDER BY p.id"),
 	
 	@NamedQuery(name="Pessoa.findByUsuarioANDSenha", 
 	query="SELECT p FROM Pessoa p WHERE p.usuario = :usuario AND p.senha = :senha"),
@@ -300,7 +300,7 @@ public class Pessoa implements Serializable{
 	}
 	
 	public static int[] columnsSize() {
-		int[] array = {50, 200, 200, 50, 250, 250, 50, 200, 200, 50, 200, 400};
+		int[] array = {50, 200, 200, 100, 250, 250, 100, 200, 200, 100, 200, 400};
 		return array;
 	}
 	

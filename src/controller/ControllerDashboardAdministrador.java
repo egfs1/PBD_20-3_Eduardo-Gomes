@@ -6,19 +6,24 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 import dao.GenericDAO;
 import model.Criptografar;
 import model.GerarSenha;
 import model.Pessoa;
 import tabelamodelos.TabelaPessoaModel;
+import tabelamodelos.TabelaSalarioFamiliaModel;
+import tabelamodelos.TabelaSalarioMinimoModel;
+import tabelasconfig.TabelaSalarioFamilia;
+import tabelasconfig.TabelaSalarioMinimo;
+import tabelasconfig.ValoresINSS;
+import tabelasconfig.ValoresIRRF;
 import view.PanelCadastro;
 import view.PanelDashboardAdministrador;
 import view.PanelEditar;
 import view.PanelEditarPerfil;
 import view.PanelLogin;
 import view.PanelTabela;
+import view.PanelVariasTabelas;
 
 public class ControllerDashboardAdministrador {
 	
@@ -113,11 +118,56 @@ public class ControllerDashboardAdministrador {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TabelaPessoaModel tableModel = new TabelaPessoaModel();
 				List<Pessoa> dados = GenericDAO.getPdao().findAll(GenericDAO.getEmf());
-				tableModel.setDados(dados);
+				TabelaPessoaModel tableModel = new TabelaPessoaModel(dados);
 				tela.mudarPanel(new PanelTabela(tableModel, "Funcionários", Pessoa.columnsSize()));
 				System.gc();
+			}
+		});
+		
+		tela.getMntmTabelaSalarioMinimo().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				List<TabelaSalarioMinimo> dados = GenericDAO.getTsmdao().findAll(GenericDAO.getEmf());
+				TabelaSalarioMinimoModel tableModel = new TabelaSalarioMinimoModel(dados);
+				tela.mudarPanel(new PanelTabela(tableModel, "Salario Mínimo", TabelaSalarioMinimo.columnsSize()));
+				System.gc();
+			}
+		});
+		
+		tela.getMntmTabelaSalarioFamilia().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				List<TabelaSalarioFamilia> dados = GenericDAO.getTsfdao().findAll(GenericDAO.getEmf());
+				TabelaSalarioFamiliaModel tableModel = new TabelaSalarioFamiliaModel(dados);
+				tela.mudarPanel(new PanelTabela(tableModel, "Salario Família", TabelaSalarioFamilia.columnsSize()));
+				System.gc();
+			}
+		});
+		
+		tela.getMntmTabelaINSS().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ValoresINSS[][]dados = GenericDAO.getTinssdao().getAllValues(GenericDAO.getEmf());
+				List<Object> tabelas = GenericDAO.getTinssdao().findAll(GenericDAO.getEmf());
+				tela.mudarPanel(new PanelVariasTabelas(dados, tabelas, "INSS", ValoresINSS.columnsSize(), ValoresINSS.tableHeight()));
+				System.gc();
+				
+			}
+		});
+		
+		tela.getMntmTabelaIRRF().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ValoresIRRF[][]dados = GenericDAO.getTirrfdao().getAllValues(GenericDAO.getEmf());
+				List<Object> tabelas = GenericDAO.getTirrfdao().findAll(GenericDAO.getEmf());
+				tela.mudarPanel(new PanelVariasTabelas(dados, tabelas, "IRRF", ValoresIRRF.columnsSize(), ValoresIRRF.tableHeight()));
+				System.gc();
+				
 			}
 		});
 		

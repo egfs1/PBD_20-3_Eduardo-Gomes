@@ -17,9 +17,16 @@ public class PanelDashboardAdministrador extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JMenuItem mntmDeslogar, mntmSair, mntmCadastrarFuncionario, mntmEditar, mntmResetarSenha, mntmMeuPerfil, mntmTabelaPessoas;
+	private JMenuItem mntmDeslogar, mntmSair, mntmCadastrarFuncionario, mntmEditar, mntmResetarSenha, mntmMeuPerfil, mntmTabelaPessoas,mntmTabelaSalarioMinimo;
 	private JPanel panel;
 	private Long IDPessoa;
+
+	private JMenuItem mntmTabelaSalarioFamilia;
+
+	private JMenuItem mntmTabelaINSS;
+
+	private JMenuItem mntmTabelaIRRF;
+
 	
 	/**
 	 * Create the panel.
@@ -68,6 +75,18 @@ public class PanelDashboardAdministrador extends JPanel {
 		mntmTabelaPessoas = new JMenuItem("Tabela de Funcionarios");
 		mnTabelas.add(mntmTabelaPessoas);
 		
+		mntmTabelaSalarioMinimo = new JMenuItem("Tabela Salario M\u00EDnimo");
+		mnTabelas.add(mntmTabelaSalarioMinimo);
+		
+		mntmTabelaSalarioFamilia = new JMenuItem("Tabela Salario Fam\u00EDlia");
+		mnTabelas.add(mntmTabelaSalarioFamilia);
+		
+		mntmTabelaINSS = new JMenuItem("Tabela INSS");
+		mnTabelas.add(mntmTabelaINSS);
+		
+		mntmTabelaIRRF = new JMenuItem("Tabela IRRF");
+		mnTabelas.add(mntmTabelaIRRF);
+		
 		JMenu mnOpcoes = new JMenu("Op\u00E7\u00F5es");
 		mnOpcoes.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
 		mnOpcoes.setBounds(300,0,100, 32);
@@ -115,11 +134,25 @@ public class PanelDashboardAdministrador extends JPanel {
 	public JMenuItem getMntmMeuPerfil() {
 		return mntmMeuPerfil;
 	}
-	
-	
 
 	public JMenuItem getMntmTabelaPessoas() {
 		return mntmTabelaPessoas;
+	}
+
+	public JMenuItem getMntmTabelaSalarioMinimo() {
+		return mntmTabelaSalarioMinimo;
+	}
+
+	public JMenuItem getMntmTabelaSalarioFamilia() {
+		return mntmTabelaSalarioFamilia;
+	}
+
+	public JMenuItem getMntmTabelaINSS() {
+		return mntmTabelaINSS;
+	}
+
+	public JMenuItem getMntmTabelaIRRF() {
+		return mntmTabelaIRRF;
 	}
 
 	public void mudarPanel(JPanel panel) {

@@ -30,6 +30,7 @@ public class RequestResetSenhaDAO {
 			return false;
 		} catch (Exception e) {
 			em.getTransaction().rollback();
+			em.close();
 			return false;
 		}
 	}
