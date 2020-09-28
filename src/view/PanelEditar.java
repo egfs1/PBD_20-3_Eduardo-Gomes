@@ -47,7 +47,9 @@ public class PanelEditar extends JPanel {
 		setBounds(0, 32, 800, 568);
 		setLayout(null);
 		
-		JLabel lblEditar = new JLabel("Editar");
+		JLabel lblEditar = new JLabel("Editar Funcion\u00E1rio");
+		lblEditar.setBackground(SystemColor.textHighlight);
+		lblEditar.setOpaque(true);
 		lblEditar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEditar.setFont(new Font("Microsoft YaHei UI Light", Font.BOLD, 26));
 		lblEditar.setForeground(SystemColor.text);

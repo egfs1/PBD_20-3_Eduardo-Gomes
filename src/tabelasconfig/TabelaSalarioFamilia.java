@@ -37,7 +37,6 @@ public class TabelaSalarioFamilia {
 	private double valorUnitario;
 
 	public TabelaSalarioFamilia(Date vigencia, double remuneracaoMensal, double valorUnitario) {
-		super();
 		this.vigencia = vigencia;
 		this.remuneracaoMensal = remuneracaoMensal;
 		this.valorUnitario = valorUnitario;

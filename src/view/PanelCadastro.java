@@ -41,7 +41,9 @@ public class PanelCadastro extends JPanel {
 		setBounds(0, 32, 800, 568);
 		setLayout(null);
 		
-		JLabel lblCadastro = new JLabel("Cadastro");
+		JLabel lblCadastro = new JLabel("Cadastro de Funcion\u00E1rio");
+		lblCadastro.setBackground(SystemColor.textHighlight);
+		lblCadastro.setOpaque(true);
 		lblCadastro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCadastro.setFont(new Font("Microsoft YaHei UI Light", Font.BOLD, 26));
 		lblCadastro.setForeground(SystemColor.text);

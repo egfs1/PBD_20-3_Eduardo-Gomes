@@ -46,6 +46,8 @@ public class PanelEditarPerfil extends JPanel {
 		setLayout(null);
 		
 		JLabel lblPerfil = new JLabel("Perfil");
+		lblPerfil.setOpaque(true);
+		lblPerfil.setBackground(SystemColor.textHighlight);
 		lblPerfil.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPerfil.setFont(new Font("Microsoft YaHei UI Light", Font.BOLD, 26));
 		lblPerfil.setForeground(SystemColor.text);

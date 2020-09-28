@@ -51,11 +51,12 @@ public class PanelTabela extends JPanel {
 		add(scrollPane);
 		
 		JLabel lblNewLabel = new JLabel(titulo);
-		lblNewLabel.setBackground(SystemColor.inactiveCaption);
+		lblNewLabel.setOpaque(true);
+		lblNewLabel.setBackground(SystemColor.textHighlight);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Microsoft YaHei UI Light", Font.BOLD, 26));
-		lblNewLabel.setBounds(10, 11, 780, 62);
+		lblNewLabel.setBounds(0, 0, 800, 60);
 		add(lblNewLabel);
 		
 		
