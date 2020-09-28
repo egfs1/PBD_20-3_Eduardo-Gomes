@@ -108,8 +108,8 @@ public class PanelVariasTabelas extends JPanel {
 			panel.repaint();
 			scrollPane.setViewportView(panel);
 			
-			if (i*(tableHeight + 150) > 497) {
-				panel.setPreferredSize(new Dimension(780, i*(tableHeight + 150)));
+			if (((i+1)*(tableHeight + 100)) > 497) {
+				panel.setPreferredSize(new Dimension(780, (i+1)*(tableHeight + 100)));
 				scrollPane.setSize(new Dimension(793, 497));
 			}
 		}

@@ -6,6 +6,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import controller.ControllerCadastrarIRRF;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -321,6 +324,8 @@ public class PanelCadastrarIRRF extends JPanel {
 		lblNewLabel_1_1_1_1_4_4.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 16));
 		lblNewLabel_1_1_1_1_4_4.setBounds(634, 347, 136, 30);
 		panel.add(lblNewLabel_1_1_1_1_4_4);
+		
+		new ControllerCadastrarIRRF(this);
 	}
 
 

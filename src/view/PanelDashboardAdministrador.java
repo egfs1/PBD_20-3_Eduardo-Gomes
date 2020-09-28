@@ -27,6 +27,14 @@ public class PanelDashboardAdministrador extends JPanel {
 
 	private JMenuItem mntmTabelaIRRF;
 
+	private JMenuItem mntmCadVigenciaSalarioMinimo;
+
+	private JMenuItem mntmCadVigenciaSalarioFamilia;
+
+	private JMenuItem mntmCadVigenciaINSS;
+
+	private JMenuItem mntmCadVigenciaIRRF;
+
 	
 	/**
 	 * Create the panel.
@@ -50,15 +58,27 @@ public class PanelDashboardAdministrador extends JPanel {
 		mnCadastro.setBounds(0,0,100, 32);
 		menuBar.add(mnCadastro);
 		
-		mntmCadastrarFuncionario = new JMenuItem("Cadastrar Funcionario");
+		mntmCadastrarFuncionario = new JMenuItem("Funcionario");
 		mnCadastro.add(mntmCadastrarFuncionario);
+		
+		mntmCadVigenciaSalarioMinimo = new JMenuItem("Vig\u00EAncia Salario Minimo");
+		mnCadastro.add(mntmCadVigenciaSalarioMinimo);
+		
+		mntmCadVigenciaSalarioFamilia = new JMenuItem("Vig\u00EAncia Salario Familia");
+		mnCadastro.add(mntmCadVigenciaSalarioFamilia);
+		
+		mntmCadVigenciaINSS = new JMenuItem("Vig\u00EAncia INSS");
+		mnCadastro.add(mntmCadVigenciaINSS);
+		
+		mntmCadVigenciaIRRF = new JMenuItem("Vig\u00EAncia IRRF");
+		mnCadastro.add(mntmCadVigenciaIRRF);
 		
 		JMenu mnEditar = new JMenu("Editar");
 		mnEditar.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
 		mnEditar.setBounds(100,0,100, 32);
 		menuBar.add(mnEditar);
 		
-		mntmEditar = new JMenuItem("Editar Funcionario");
+		mntmEditar = new JMenuItem("Funcionario");
 		mnEditar.add(mntmEditar);
 		
 		mntmMeuPerfil = new JMenuItem("Meu Perfil");
@@ -153,6 +173,22 @@ public class PanelDashboardAdministrador extends JPanel {
 
 	public JMenuItem getMntmTabelaIRRF() {
 		return mntmTabelaIRRF;
+	}
+
+	public JMenuItem getMntmCadVigenciaSalarioMinimo() {
+		return mntmCadVigenciaSalarioMinimo;
+	}
+
+	public JMenuItem getMntmCadVigenciaSalarioFamilia() {
+		return mntmCadVigenciaSalarioFamilia;
+	}
+
+	public JMenuItem getMntmCadVigenciaINSS() {
+		return mntmCadVigenciaINSS;
+	}
+
+	public JMenuItem getMntmCadVigenciaIRRF() {
+		return mntmCadVigenciaIRRF;
 	}
 
 	public void mudarPanel(JPanel panel) {

@@ -6,6 +6,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import controller.ControllerCadastrarINSS;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -219,6 +222,8 @@ public class PanelCadastrarINSS extends JPanel {
 		textFieldAliquota4.setColumns(10);
 		textFieldAliquota4.setBounds(595, 324, 175, 30);
 		panel.add(textFieldAliquota4);
+		
+		new ControllerCadastrarINSS(this);
 	}
 
 

@@ -19,7 +19,6 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
-import javax.swing.ButtonGroup;
 
 public class PanelEditarPerfil extends JPanel {
 	/**
@@ -31,8 +30,6 @@ public class PanelEditarPerfil extends JPanel {
 	private JFormattedTextField formattedTextFieldFilhos, formattedTextFieldData;
 	private JTextField textFieldUsuario;
 	private JButton btnSalvar;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private final ButtonGroup buttonGroup_2 = new ButtonGroup();
 	
 	private Pessoa pessoa;
 	private JPasswordField textFieldSenha;

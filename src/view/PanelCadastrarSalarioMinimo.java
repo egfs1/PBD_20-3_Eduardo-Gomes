@@ -6,11 +6,18 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import controller.ControllerCadastrarSalarioMinimo;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class PanelCadastrarSalarioMinimo extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textFieldVigencia;
 	private JTextField textFieldValor;
 	private JButton btnSalvar;
@@ -65,6 +72,8 @@ public class PanelCadastrarSalarioMinimo extends JPanel {
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.setBounds(110, 228, 89, 30);
 		panel.add(btnSalvar);
+		
+		new ControllerCadastrarSalarioMinimo(this);
 	}
 
 

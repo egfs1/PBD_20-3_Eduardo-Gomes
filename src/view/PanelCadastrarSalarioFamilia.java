@@ -6,11 +6,18 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import controller.ControllerCadastrarSalarioFamilia;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class PanelCadastrarSalarioFamilia extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textFieldVigencia;
 	private JTextField textFieldRemuneracao;
 	private JButton btnSalvar;
@@ -77,6 +84,8 @@ public class PanelCadastrarSalarioFamilia extends JPanel {
 		textFieldValor.setColumns(10);
 		textFieldValor.setBounds(100, 216, 110, 30);
 		panel.add(textFieldValor);
+		
+		new ControllerCadastrarSalarioFamilia(this);
 	}
 
 

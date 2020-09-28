@@ -17,6 +17,10 @@ import tabelasconfig.TabelaSalarioFamilia;
 import tabelasconfig.TabelaSalarioMinimo;
 import tabelasconfig.ValoresINSS;
 import tabelasconfig.ValoresIRRF;
+import view.PanelCadastrarINSS;
+import view.PanelCadastrarIRRF;
+import view.PanelCadastrarSalarioFamilia;
+import view.PanelCadastrarSalarioMinimo;
 import view.PanelCadastro;
 import view.PanelDashboardAdministrador;
 import view.PanelEditar;
@@ -29,22 +33,7 @@ public class ControllerDashboardAdministrador {
 	
 	public ControllerDashboardAdministrador(PanelDashboardAdministrador tela) {
 		
-		tela.getMntmSair().addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		
-		tela.getMntmDeslogar().addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				ControllerTela.setPanel(new PanelLogin());
-				System.gc();
-			}
-		});
+		// CADASTRAR ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		tela.getMntmCadastrarFuncionario().addActionListener(new ActionListener() {
 			
@@ -54,6 +43,44 @@ public class ControllerDashboardAdministrador {
 				System.gc();
 			}
 		});
+		
+		tela.getMntmCadVigenciaSalarioMinimo().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tela.mudarPanel(new PanelCadastrarSalarioMinimo());
+				System.gc();
+			}
+		});
+		
+		tela.getMntmCadVigenciaSalarioFamilia().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tela.mudarPanel(new PanelCadastrarSalarioFamilia());
+				System.gc();
+			}
+		});
+		
+		tela.getMntmCadVigenciaINSS().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tela.mudarPanel(new PanelCadastrarINSS());
+				System.gc();
+			}
+		});
+		
+		tela.getMntmCadVigenciaIRRF().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tela.mudarPanel(new PanelCadastrarIRRF());
+				System.gc();
+			}
+		});
+		
+		// EDITAR ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		tela.getMntmEditar().addActionListener(new ActionListener() {
 			
@@ -114,6 +141,8 @@ public class ControllerDashboardAdministrador {
 			}
 		});
 		
+		// TABELAS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 		tela.getMntmTabelaPessoas().addActionListener(new ActionListener() {
 			
 			@Override
@@ -168,6 +197,25 @@ public class ControllerDashboardAdministrador {
 				tela.mudarPanel(new PanelVariasTabelas(dados, tabelas, "IRRF", ValoresIRRF.columnsSize(), ValoresIRRF.tableHeight()));
 				System.gc();
 				
+			}
+		});
+		
+		// OPÇÕES ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		tela.getMntmSair().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
+		tela.getMntmDeslogar().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ControllerTela.setPanel(new PanelLogin());
+				System.gc();
 			}
 		});
 		
