@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import model.FormatarVigencia;
 import tabelasconfig.TabelaSalarioFamilia;
 
 public class TabelaSalarioFamiliaModel extends AbstractTableModel {
@@ -42,7 +43,7 @@ public class TabelaSalarioFamiliaModel extends AbstractTableModel {
 			return dados.get(rowIndex).getId();
 		
 		case 1:
-			return dados.get(rowIndex).getVigencia();
+			return FormatarVigencia.dateToFormat(dados.get(rowIndex).getVigencia());
 		
 		case 2:
 			return dados.get(rowIndex).getRemuneracaoMensal();

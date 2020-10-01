@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,7 +8,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
 import tabelasconfig.TabelaSalarioFamilia;
-import tabelasconfig.TabelaSalarioMinimo;
 
 public class TabelaSalarioFamiliaDAO {
 	
@@ -15,8 +15,8 @@ public class TabelaSalarioFamiliaDAO {
 	
 	public boolean persist(TabelaSalarioFamilia t, EntityManagerFactory emf) {
 		try{
-			this.em = emf.createEntityManager(); 
 			if (!existeVigencia(t, emf)) {
+				this.em = emf.createEntityManager();
 				em.getTransaction().begin();
 				em.persist(t);
 				em.getTransaction().commit();
@@ -72,7 +72,7 @@ public class TabelaSalarioFamiliaDAO {
 	public boolean existeVigencia(TabelaSalarioFamilia t, EntityManagerFactory emf) {
 		try {
 			this.em = emf.createEntityManager();
-			Query query = em.createNamedQuery("SalarioFamilia.findByVigencia", TabelaSalarioMinimo.class);
+			Query query = em.createNamedQuery("SalarioFamilia.findByVigencia", TabelaSalarioFamilia.class);
 			query.setParameter("vigencia", t.getVigencia());
 			boolean existe = query.getResultList().size() > 0;
 			em.close();
@@ -82,6 +82,21 @@ public class TabelaSalarioFamiliaDAO {
 		}
 		em.close();
 		return false;
+	}
+	
+	public TabelaSalarioFamilia findByVigencia(Date vigencia, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			Query query = em.createNamedQuery("SalarioFamilia.findByVigencia", TabelaSalarioFamilia.class);
+			query.setParameter("vigencia", vigencia);
+			TabelaSalarioFamilia tabela = (TabelaSalarioFamilia) query.getSingleResult();
+			em.close();
+			return tabela;
+		}
+		catch (Exception e) {
+		}
+		em.close();
+		return null;
 	}
 	
 	public List<TabelaSalarioFamilia> findAll(EntityManagerFactory emf){

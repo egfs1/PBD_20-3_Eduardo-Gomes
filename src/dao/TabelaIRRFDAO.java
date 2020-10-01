@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -55,6 +56,20 @@ public class TabelaIRRFDAO {
 	
 	public void remove(TabelaIRRF t, EntityManagerFactory emf) {
 		try {
+			
+			ValoresIRRF v1 = GenericDAO.getVirrfdao().findID(t.getIdValorIRRF1(), GenericDAO.getEmf());
+			ValoresIRRF v2 = GenericDAO.getVirrfdao().findID(t.getIdValorIRRF2(), GenericDAO.getEmf());
+			ValoresIRRF v3 = GenericDAO.getVirrfdao().findID(t.getIdValorIRRF3(), GenericDAO.getEmf());
+			ValoresIRRF v4 = GenericDAO.getVirrfdao().findID(t.getIdValorIRRF4(), GenericDAO.getEmf());
+			ValoresIRRF v5 = GenericDAO.getVirrfdao().findID(t.getIdValorIRRF5(), GenericDAO.getEmf());
+			
+			GenericDAO.getVirrfdao().remove(v1, emf);
+			GenericDAO.getVirrfdao().remove(v2, emf);
+			GenericDAO.getVirrfdao().remove(v3, emf);
+			GenericDAO.getVirrfdao().remove(v4, emf);
+			GenericDAO.getVirrfdao().remove(v5, emf);
+			
+			
 			this.em = emf.createEntityManager();
 			
 			em.getTransaction().begin();
@@ -148,6 +163,21 @@ public class TabelaIRRFDAO {
 		em.close();
 		return null;
 		
+	}
+	
+	public TabelaIRRF findByVigencia(Date vigencia, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			Query query = em.createNamedQuery("TabelaIRRF.findByVigencia", TabelaIRRF.class);
+			query.setParameter("vigencia", vigencia);
+			TabelaIRRF tabela = (TabelaIRRF) query.getSingleResult();
+			em.close();
+			return tabela;
+		}
+		catch (Exception e) {
+		}
+		em.close();
+		return null;
 	}
 	
 }

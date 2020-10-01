@@ -41,6 +41,8 @@ public class TabelaSalarioFamilia {
 		this.remuneracaoMensal = remuneracaoMensal;
 		this.valorUnitario = valorUnitario;
 	}
+	
+	public TabelaSalarioFamilia() {}
 
 	public Long getId() {
 		return id;

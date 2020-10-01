@@ -35,6 +35,14 @@ public class PanelDashboardAdministrador extends JPanel {
 
 	private JMenuItem mntmCadVigenciaIRRF;
 
+	private JMenuItem mntmEditarSalarioMinimo;
+
+	private JMenuItem mntmEditarSalarioFamilia;
+
+	private JMenuItem mntmEditarINSS;
+
+	private JMenuItem mntmEditarIRRF;
+
 	
 	/**
 	 * Create the panel.
@@ -80,6 +88,18 @@ public class PanelDashboardAdministrador extends JPanel {
 		
 		mntmEditar = new JMenuItem("Funcionario");
 		mnEditar.add(mntmEditar);
+		
+		mntmEditarSalarioMinimo = new JMenuItem("Vig\u00EAncia Salario Minimo");
+		mnEditar.add(mntmEditarSalarioMinimo);
+		
+		mntmEditarSalarioFamilia = new JMenuItem("Vig\u00EAncia Salario Familia");
+		mnEditar.add(mntmEditarSalarioFamilia);
+		
+		mntmEditarINSS = new JMenuItem("Vig\u00EAncia INSS");
+		mnEditar.add(mntmEditarINSS);
+		
+		mntmEditarIRRF = new JMenuItem("Vig\u00EAncia IRRF");
+		mnEditar.add(mntmEditarIRRF);
 		
 		mntmMeuPerfil = new JMenuItem("Meu Perfil");
 		mnEditar.add(mntmMeuPerfil);
@@ -189,6 +209,22 @@ public class PanelDashboardAdministrador extends JPanel {
 
 	public JMenuItem getMntmCadVigenciaIRRF() {
 		return mntmCadVigenciaIRRF;
+	}
+
+	public JMenuItem getMntmEditarSalarioMinimo() {
+		return mntmEditarSalarioMinimo;
+	}
+
+	public JMenuItem getMntmEditarSalarioFamilia() {
+		return mntmEditarSalarioFamilia;
+	}
+
+	public JMenuItem getMntmEditarINSS() {
+		return mntmEditarINSS;
+	}
+
+	public JMenuItem getMntmEditarIRRF() {
+		return mntmEditarIRRF;
 	}
 
 	public void mudarPanel(JPanel panel) {

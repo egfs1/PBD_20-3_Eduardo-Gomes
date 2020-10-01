@@ -2,17 +2,19 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.List;
-
 import javax.swing.JOptionPane;
-
 import dao.GenericDAO;
 import model.Criptografar;
+import model.FormatarVigencia;
 import model.GerarSenha;
 import model.Pessoa;
 import tabelamodelos.TabelaPessoaModel;
 import tabelamodelos.TabelaSalarioFamiliaModel;
 import tabelamodelos.TabelaSalarioMinimoModel;
+import tabelasconfig.TabelaINSS;
+import tabelasconfig.TabelaIRRF;
 import tabelasconfig.TabelaSalarioFamilia;
 import tabelasconfig.TabelaSalarioMinimo;
 import tabelasconfig.ValoresINSS;
@@ -24,7 +26,11 @@ import view.PanelCadastrarSalarioMinimo;
 import view.PanelCadastro;
 import view.PanelDashboardAdministrador;
 import view.PanelEditar;
+import view.PanelEditarINSS;
+import view.PanelEditarIRRF;
 import view.PanelEditarPerfil;
+import view.PanelEditarSalarioFamilia;
+import view.PanelEditarSalarioMinimo;
 import view.PanelLogin;
 import view.PanelTabela;
 import view.PanelVariasTabelas;
@@ -98,6 +104,112 @@ public class ControllerDashboardAdministrador {
 				
 				JOptionPane.showMessageDialog(null, "Não foi encontrado nenhum funcionário com esse ID/Nome de usuario!");
 				
+				
+			}
+		});
+		
+		tela.getMntmEditarSalarioMinimo().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					String vigenciaString = JOptionPane.showInputDialog(null, "Digite a vigência que deseja editar! (MM/yyyy)");
+					Date vigencia = FormatarVigencia.formatToDate(vigenciaString);
+					
+					if (vigencia==null) {
+						JOptionPane.showMessageDialog(null, "Escreva a vigência da forma correta!");
+						return;
+					}
+					
+					TabelaSalarioMinimo tabela = GenericDAO.getTsmdao().findByVigencia(vigencia, GenericDAO.getEmf());
+					if (tabela!=null) {
+						tela.mudarPanel(new PanelEditarSalarioMinimo(tabela));
+						System.gc();
+						return;
+					}
+					JOptionPane.showMessageDialog(null, "Essa vigência não existe!");
+				
+				
+			}
+		});
+		
+		tela.getMntmEditarSalarioFamilia().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String vigenciaString = JOptionPane.showInputDialog(null, "Digite a vigência que deseja editar! (MM/yyyy)");
+				Date vigencia = FormatarVigencia.formatToDate(vigenciaString);
+				
+				if (vigencia==null) {
+					JOptionPane.showMessageDialog(null, "Escreva a vigência da forma correta!");
+					return;
+				}
+				
+				TabelaSalarioFamilia tabela = GenericDAO.getTsfdao().findByVigencia(vigencia, GenericDAO.getEmf());
+				if (tabela!=null) {
+					tela.mudarPanel(new PanelEditarSalarioFamilia(tabela));
+					System.gc();
+					return;
+				}
+				JOptionPane.showMessageDialog(null, "Essa vigência não existe!");
+			}
+		});
+		
+		tela.getMntmEditarINSS().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String vigenciaString = JOptionPane.showInputDialog(null, "Digite a vigência que deseja editar! (MM/yyyy)");
+				Date vigencia = FormatarVigencia.formatToDate(vigenciaString);
+				
+				if (vigencia==null) {
+					JOptionPane.showMessageDialog(null, "Escreva a vigência da forma correta!");
+					return;
+				}
+				
+				TabelaINSS tabela = GenericDAO.getTinssdao().findByVigencia(vigencia, GenericDAO.getEmf());
+				if (tabela!=null) {
+					
+					ValoresINSS valor1 = GenericDAO.getVinssdao().findID(tabela.getIdValorINSS1(), GenericDAO.getEmf());
+					ValoresINSS valor2 = GenericDAO.getVinssdao().findID(tabela.getIdValorINSS2(), GenericDAO.getEmf());
+					ValoresINSS valor3 = GenericDAO.getVinssdao().findID(tabela.getIdValorINSS3(), GenericDAO.getEmf());
+					ValoresINSS valor4 = GenericDAO.getVinssdao().findID(tabela.getIdValorINSS4(), GenericDAO.getEmf());
+					
+					tela.mudarPanel(new PanelEditarINSS(tabela, valor1, valor2, valor3, valor4));
+					System.gc();
+					return;
+				}
+				JOptionPane.showMessageDialog(null, "Essa vigência não existe!");
+				
+			}
+		});
+		
+		tela.getMntmEditarIRRF().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String vigenciaString = JOptionPane.showInputDialog(null, "Digite a vigência que deseja editar! (MM/yyyy)");
+				Date vigencia = FormatarVigencia.formatToDate(vigenciaString);
+				
+				if (vigencia==null) {
+					JOptionPane.showMessageDialog(null, "Escreva a vigência da forma correta!");
+					return;
+				}
+				
+				TabelaIRRF tabela = GenericDAO.getTirrfdao().findByVigencia(vigencia, GenericDAO.getEmf());
+				
+				if (tabela!=null) {
+					
+					ValoresIRRF valor1 = GenericDAO.getVirrfdao().findID(tabela.getIdValorIRRF1(), GenericDAO.getEmf());
+					ValoresIRRF valor2 = GenericDAO.getVirrfdao().findID(tabela.getIdValorIRRF2(), GenericDAO.getEmf());
+					ValoresIRRF valor3 = GenericDAO.getVirrfdao().findID(tabela.getIdValorIRRF3(), GenericDAO.getEmf());
+					ValoresIRRF valor4 = GenericDAO.getVirrfdao().findID(tabela.getIdValorIRRF4(), GenericDAO.getEmf());
+					ValoresIRRF valor5 = GenericDAO.getVirrfdao().findID(tabela.getIdValorIRRF5(), GenericDAO.getEmf());
+					
+					tela.mudarPanel(new PanelEditarIRRF(tabela, valor1, valor2, valor3, valor4, valor5));
+					System.gc();
+					return;
+				}
+				JOptionPane.showMessageDialog(null, "Essa vigência não existe!");
 				
 			}
 		});

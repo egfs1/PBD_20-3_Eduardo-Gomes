@@ -1,11 +1,11 @@
 package tabelamodelos;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import model.FormatarVigencia;
 import tabelasconfig.TabelaSalarioMinimo;
 
 public class TabelaSalarioMinimoModel extends AbstractTableModel {
@@ -13,7 +13,6 @@ public class TabelaSalarioMinimoModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	private List<TabelaSalarioMinimo> dados = new ArrayList<>();
 	private String[] colunas = {"ID", "Vigência", "Valor do Salario Mínimo"};
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("mm-yyyy");
 	
 	public TabelaSalarioMinimoModel(List<TabelaSalarioMinimo> dados) {
 		this.dados = dados;
@@ -44,7 +43,7 @@ public class TabelaSalarioMinimoModel extends AbstractTableModel {
 			return dados.get(rowIndex).getId();
 		
 		case 1:
-			return dateFormat.format(dados.get(rowIndex).getVigencia());
+			return FormatarVigencia.dateToFormat(dados.get(rowIndex).getVigencia());
 		
 		case 2:
 			return "R$ " +  dados.get(rowIndex).getValor();

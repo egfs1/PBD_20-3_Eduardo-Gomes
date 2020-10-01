@@ -39,6 +39,8 @@ public class TabelaSalarioMinimo {
 		this.valor = valor;
 	}
 	
+	public TabelaSalarioMinimo() {}
+	
 	public Long getId() {
 		return id;
 	}

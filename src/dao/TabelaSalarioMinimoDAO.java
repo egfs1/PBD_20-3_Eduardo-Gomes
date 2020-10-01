@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,9 +14,9 @@ public class TabelaSalarioMinimoDAO {
 	private EntityManager em;
 	
 	public boolean persist(TabelaSalarioMinimo t, EntityManagerFactory emf) {
-		try{
-			this.em = emf.createEntityManager(); 
+		try{ 
 			if (!existeVigencia(t, emf)) {
+				this.em = emf.createEntityManager();
 				em.getTransaction().begin();
 				em.persist(t);
 				em.getTransaction().commit();
@@ -81,6 +82,21 @@ public class TabelaSalarioMinimoDAO {
 		}
 		em.close();
 		return false;
+	}
+	
+	public TabelaSalarioMinimo findByVigencia(Date vigencia, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			Query query = em.createNamedQuery("SalarioMinimo.findByVigencia", TabelaSalarioMinimo.class);
+			query.setParameter("vigencia", vigencia);
+			TabelaSalarioMinimo tabela = (TabelaSalarioMinimo) query.getSingleResult();
+			em.close();
+			return tabela;
+		}
+		catch (Exception e) {
+		}
+		em.close();
+		return null;
 	}
 	
 	public List<TabelaSalarioMinimo> findAll(EntityManagerFactory emf){

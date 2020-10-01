@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -53,6 +54,18 @@ public class TabelaINSSDAO {
 	
 	public void remove(TabelaINSS t, EntityManagerFactory emf) {
 		try {
+			
+			ValoresINSS v1 = GenericDAO.getVinssdao().findID(t.getIdValorINSS1(), GenericDAO.getEmf());
+			ValoresINSS v2 = GenericDAO.getVinssdao().findID(t.getIdValorINSS2(), GenericDAO.getEmf());
+			ValoresINSS v3 = GenericDAO.getVinssdao().findID(t.getIdValorINSS3(), GenericDAO.getEmf());
+			ValoresINSS v4 = GenericDAO.getVinssdao().findID(t.getIdValorINSS4(), GenericDAO.getEmf());
+			
+			GenericDAO.getVinssdao().remove(v1, emf);
+			GenericDAO.getVinssdao().remove(v2, emf);
+			GenericDAO.getVinssdao().remove(v3, emf);
+			GenericDAO.getVinssdao().remove(v4, emf);
+			
+			
 			this.em = emf.createEntityManager();
 			
 			em.getTransaction().begin();
@@ -142,6 +155,21 @@ public class TabelaINSSDAO {
 		em.close();
 		return null;
 		
+	}
+	
+	public TabelaINSS findByVigencia(Date vigencia, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			Query query = em.createNamedQuery("TabelaINSS.findByVigencia", TabelaINSS.class);
+			query.setParameter("vigencia", vigencia);
+			TabelaINSS tabela = (TabelaINSS) query.getSingleResult();
+			em.close();
+			return tabela;
+		}
+		catch (Exception e) {
+		}
+		em.close();
+		return null;
 	}
 	
 }

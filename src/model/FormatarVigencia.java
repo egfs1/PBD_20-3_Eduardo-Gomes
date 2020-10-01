@@ -19,7 +19,6 @@ public class FormatarVigencia {
 		try {
 			return format.parse(data);
 		} catch (ParseException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
