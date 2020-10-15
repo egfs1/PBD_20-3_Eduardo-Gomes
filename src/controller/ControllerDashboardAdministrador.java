@@ -10,9 +10,11 @@ import model.Criptografar;
 import model.FormatarVigencia;
 import model.GerarSenha;
 import model.Pessoa;
+import tabelamodelos.TabelaMesDeReferenciaModel;
 import tabelamodelos.TabelaPessoaModel;
 import tabelamodelos.TabelaSalarioFamiliaModel;
 import tabelamodelos.TabelaSalarioMinimoModel;
+import tabelasconfig.MesDeReferencia;
 import tabelasconfig.TabelaINSS;
 import tabelasconfig.TabelaIRRF;
 import tabelasconfig.TabelaSalarioFamilia;
@@ -21,6 +23,7 @@ import tabelasconfig.ValoresINSS;
 import tabelasconfig.ValoresIRRF;
 import view.PanelCadastrarINSS;
 import view.PanelCadastrarIRRF;
+import view.PanelCadastrarMesDeReferencia;
 import view.PanelCadastrarSalarioFamilia;
 import view.PanelCadastrarSalarioMinimo;
 import view.PanelCadastro;
@@ -28,6 +31,7 @@ import view.PanelDashboardAdministrador;
 import view.PanelEditar;
 import view.PanelEditarINSS;
 import view.PanelEditarIRRF;
+import view.PanelEditarMesDeReferencia;
 import view.PanelEditarPerfil;
 import view.PanelEditarSalarioFamilia;
 import view.PanelEditarSalarioMinimo;
@@ -82,6 +86,15 @@ public class ControllerDashboardAdministrador {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				tela.mudarPanel(new PanelCadastrarIRRF());
+				System.gc();
+			}
+		});
+		
+		tela.getMntmCadMesDeReferencia().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tela.mudarPanel(new PanelCadastrarMesDeReferencia());
 				System.gc();
 			}
 		});
@@ -214,6 +227,30 @@ public class ControllerDashboardAdministrador {
 			}
 		});
 		
+		tela.getMntmEditMesDeReferencia().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				String vigenciaString = JOptionPane.showInputDialog(null, "Digite a vigência que deseja editar! (MM/yyyy)");
+				Date vigencia = FormatarVigencia.formatToDate(vigenciaString);
+				
+				if (vigencia==null) {
+					JOptionPane.showMessageDialog(null, "Escreva a vigência da forma correta!");
+					return;
+				}
+				
+				MesDeReferencia mes = GenericDAO.getMdrdao().findByVigencia(vigencia, GenericDAO.getEmf());
+				
+				if (mes!=null) {
+					tela.mudarPanel(new PanelEditarMesDeReferencia(mes));
+					System.gc();
+					return;
+				}
+				
+			}
+		});
+		
 		tela.getMntmResetarSenha().addActionListener(new ActionListener() {
 			
 			@Override
@@ -309,6 +346,18 @@ public class ControllerDashboardAdministrador {
 				tela.mudarPanel(new PanelVariasTabelas(dados, tabelas, "IRRF", ValoresIRRF.columnsSize(), ValoresIRRF.tableHeight()));
 				System.gc();
 				
+			}
+		});
+		
+		tela.getMntmTabelaMesDeReferencia().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				List<MesDeReferencia> dados = GenericDAO.getMdrdao().findAll(GenericDAO.getEmf());
+				TabelaMesDeReferenciaModel tableModel = new TabelaMesDeReferenciaModel(dados);
+				tela.mudarPanel(new PanelTabela(tableModel, "Mês de Referencia", MesDeReferencia.columnsSize()));
+				System.gc();
 			}
 		});
 		

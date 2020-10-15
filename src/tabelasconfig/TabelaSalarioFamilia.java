@@ -17,6 +17,9 @@ import javax.persistence.Table;
 	
 	@NamedQuery(name="SalarioFamilia.findByVigencia", 
 	query="SELECT x FROM TabelaSalarioFamilia x WHERE x.vigencia = :vigencia"),
+	
+	@NamedQuery(name="SalarioFamilia.findIdByVigencia", 
+	query="SELECT x.id FROM TabelaSalarioFamilia x WHERE x.vigencia = :vigencia"),
 })
 
 @Entity

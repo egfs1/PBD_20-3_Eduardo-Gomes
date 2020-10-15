@@ -146,6 +146,22 @@ public class TabelaIRRFDAO {
 		return null;
 	}
 	
+	public TabelaIRRF findID(Long id, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			
+			TabelaIRRF tabela = em.find(TabelaIRRF.class, id);
+			em.close();
+			return tabela;
+	
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		em.close();
+		return null;
+	}
+	
 	public List<Object> findAll(EntityManagerFactory emf) {
 		try {
 			this.em = emf.createEntityManager();
@@ -173,6 +189,21 @@ public class TabelaIRRFDAO {
 			TabelaIRRF tabela = (TabelaIRRF) query.getSingleResult();
 			em.close();
 			return tabela;
+		}
+		catch (Exception e) {
+		}
+		em.close();
+		return null;
+	}
+	
+	public Long findIdByVigencia(Date vigencia, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			Query query = em.createNamedQuery("TabelaIRRF.findIdByVigencia", Long.class);
+			query.setParameter("vigencia", vigencia);
+			Long id = (Long) query.getSingleResult();
+			em.close();
+			return id;
 		}
 		catch (Exception e) {
 		}

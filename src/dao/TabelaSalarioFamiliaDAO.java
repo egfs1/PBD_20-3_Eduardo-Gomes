@@ -84,6 +84,22 @@ public class TabelaSalarioFamiliaDAO {
 		return false;
 	}
 	
+	public TabelaSalarioFamilia findID(Long id, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			
+			TabelaSalarioFamilia tabela = em.find(TabelaSalarioFamilia.class, id);
+			em.close();
+			return tabela;
+	
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		em.close();
+		return null;
+	}
+	
 	public TabelaSalarioFamilia findByVigencia(Date vigencia, EntityManagerFactory emf) {
 		try {
 			this.em = emf.createEntityManager();
@@ -112,6 +128,21 @@ public class TabelaSalarioFamiliaDAO {
 		catch (Exception e) {
 			em.close();
 			e.printStackTrace();
+		}
+		em.close();
+		return null;
+	}
+	
+	public Long findIdByVigencia(Date vigencia, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			Query query = em.createNamedQuery("SalarioFamilia.findIdByVigencia", Long.class);
+			query.setParameter("vigencia", vigencia);
+			Long id = (Long) query.getSingleResult();
+			em.close();
+			return id;
+		}
+		catch (Exception e) {
 		}
 		em.close();
 		return null;

@@ -17,6 +17,9 @@ import javax.persistence.Table;
 	
 	@NamedQuery(name="TabelaIRRF.findByVigencia", 
 			query="SELECT x FROM TabelaIRRF x WHERE x.vigencia = :vigencia"),
+	
+	@NamedQuery(name="TabelaIRRF.findIdByVigencia", 
+	query="SELECT x.id FROM TabelaIRRF x WHERE x.vigencia = :vigencia"),
 })
 
 @Entity

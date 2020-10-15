@@ -84,6 +84,22 @@ public class TabelaSalarioMinimoDAO {
 		return false;
 	}
 	
+	public TabelaSalarioMinimo findID(Long id, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			
+			TabelaSalarioMinimo tabela = em.find(TabelaSalarioMinimo.class, id);
+			em.close();
+			return tabela;
+	
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		em.close();
+		return null;
+	}
+	
 	public TabelaSalarioMinimo findByVigencia(Date vigencia, EntityManagerFactory emf) {
 		try {
 			this.em = emf.createEntityManager();
@@ -112,6 +128,21 @@ public class TabelaSalarioMinimoDAO {
 		catch (Exception e) {
 			em.close();
 			e.printStackTrace();
+		}
+		em.close();
+		return null;
+	}
+	
+	public Long findIdByVigencia(Date vigencia, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			Query query = em.createNamedQuery("SalarioMinimo.findIdByVigencia", Long.class);
+			query.setParameter("vigencia", vigencia);
+			Long id = (Long) query.getSingleResult();
+			em.close();
+			return id;
+		}
+		catch (Exception e) {
 		}
 		em.close();
 		return null;

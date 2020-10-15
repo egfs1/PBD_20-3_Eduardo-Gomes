@@ -17,6 +17,9 @@ import javax.persistence.Table;
 	
 	@NamedQuery(name="SalarioMinimo.findByVigencia", 
 	query="SELECT x FROM TabelaSalarioMinimo x WHERE x.vigencia = :vigencia"),
+	
+	@NamedQuery(name="SalarioMinimo.findIdByVigencia", 
+	query="SELECT x.id FROM TabelaSalarioMinimo x WHERE x.vigencia = :vigencia"),
 })
 
 @Entity

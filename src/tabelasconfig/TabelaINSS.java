@@ -17,6 +17,10 @@ import javax.persistence.Table;
 	
 	@NamedQuery(name="TabelaINSS.findByVigencia", 
 			query="SELECT x FROM TabelaINSS x WHERE x.vigencia = :vigencia"),
+	
+	@NamedQuery(name="TabelaINSS.findIdByVigencia", 
+	query="SELECT x.id FROM TabelaINSS x WHERE x.vigencia = :vigencia"),
+	
 })
 
 @Entity

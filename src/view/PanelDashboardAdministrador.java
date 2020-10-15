@@ -43,6 +43,12 @@ public class PanelDashboardAdministrador extends JPanel {
 
 	private JMenuItem mntmEditarIRRF;
 
+	private JMenuItem mntmTabelaMesDeReferencia;
+
+	private JMenuItem mntmEditMesDeReferencia;
+
+	private JMenuItem mntmCadMesDeReferencia;
+
 	
 	/**
 	 * Create the panel.
@@ -81,6 +87,9 @@ public class PanelDashboardAdministrador extends JPanel {
 		mntmCadVigenciaIRRF = new JMenuItem("Vig\u00EAncia IRRF");
 		mnCadastro.add(mntmCadVigenciaIRRF);
 		
+		mntmCadMesDeReferencia = new JMenuItem("M\u00EAs de Referencia");
+		mnCadastro.add(mntmCadMesDeReferencia);
+		
 		JMenu mnEditar = new JMenu("Editar");
 		mnEditar.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
 		mnEditar.setBounds(100,0,100, 32);
@@ -100,6 +109,9 @@ public class PanelDashboardAdministrador extends JPanel {
 		
 		mntmEditarIRRF = new JMenuItem("Vig\u00EAncia IRRF");
 		mnEditar.add(mntmEditarIRRF);
+		
+		mntmEditMesDeReferencia = new JMenuItem("M\u00EAs de Referencia");
+		mnEditar.add(mntmEditMesDeReferencia);
 		
 		mntmMeuPerfil = new JMenuItem("Meu Perfil");
 		mnEditar.add(mntmMeuPerfil);
@@ -126,6 +138,9 @@ public class PanelDashboardAdministrador extends JPanel {
 		
 		mntmTabelaIRRF = new JMenuItem("Tabela IRRF");
 		mnTabelas.add(mntmTabelaIRRF);
+		
+		mntmTabelaMesDeReferencia = new JMenuItem("M\u00EAs de Referencia");
+		mnTabelas.add(mntmTabelaMesDeReferencia);
 		
 		JMenu mnOpcoes = new JMenu("Op\u00E7\u00F5es");
 		mnOpcoes.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
@@ -225,6 +240,22 @@ public class PanelDashboardAdministrador extends JPanel {
 
 	public JMenuItem getMntmEditarIRRF() {
 		return mntmEditarIRRF;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public JMenuItem getMntmTabelaMesDeReferencia() {
+		return mntmTabelaMesDeReferencia;
+	}
+
+	public JMenuItem getMntmEditMesDeReferencia() {
+		return mntmEditMesDeReferencia;
+	}
+
+	public JMenuItem getMntmCadMesDeReferencia() {
+		return mntmCadMesDeReferencia;
 	}
 
 	public void mudarPanel(JPanel panel) {

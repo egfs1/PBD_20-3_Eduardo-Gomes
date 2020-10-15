@@ -41,9 +41,9 @@ public class ControllerCadastrarIRRF {
 				String aliquota4 = tela.getTextFieldAliquota4().getText().intern();
 				String valorDeduzir4 = tela.getTextFieldValorDeduzir4().getText().intern();
 				
-				String valorMinimo5 = tela.getTextFieldValorMinimo4().getText().intern();
-				String valorMaximo5 = tela.getTextFieldValorMaximo4().getText().intern();
-				String aliquota5 = tela.getTextFieldAliquota4().getText().intern();
+				String valorMinimo5 = tela.getTextFieldValorMinimo5().getText().intern();
+				String valorMaximo5 = tela.getTextFieldValorMaximo5().getText().intern();
+				String aliquota5 = tela.getTextFieldAliquota5().getText().intern();
 				String valorDeduzir5 = tela.getTextFieldValorDeduzir5().getText().intern();
 				
 				

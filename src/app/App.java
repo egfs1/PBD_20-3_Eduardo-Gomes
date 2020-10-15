@@ -34,9 +34,9 @@ public class App {
 			e.printStackTrace();
 		}
 //		
-//		Pessoa p = new Pessoa("eduardo2", "brasileiro", 0, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), false, "Administrador", "Mensalista", 40, "admin2", Criptografar.criptografar("admin2"));
+//		Pessoa p = new Pessoa("eduardo", "brasileiro", 0, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), false, "Administrador", "Mensalista", 40, "admin", Criptografar.criptografar("admin"));
 //		GenericDAO.getPdao().persist(p, GenericDAO.getEmf());
-//		
+		
 //		ValoresINSS v1 = new ValoresINSS(0, 1000, 0);
 //		ValoresINSS v2 = new ValoresINSS(1001, 2000, 7.5);
 //		ValoresINSS v3 = new ValoresINSS(2001, 3000, 9);

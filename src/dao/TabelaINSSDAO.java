@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+
 import tabelasconfig.TabelaINSS;
 import tabelasconfig.ValoresINSS;
 
@@ -138,6 +139,22 @@ public class TabelaINSSDAO {
 		return null;
 	}
 	
+	public TabelaINSS findID(Long id, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			
+			TabelaINSS tabela = em.find(TabelaINSS.class, id);
+			em.close();
+			return tabela;
+	
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		em.close();
+		return null;
+	}
+	
 	public List<Object> findAll(EntityManagerFactory emf) {
 		try {
 			this.em = emf.createEntityManager();
@@ -172,4 +189,18 @@ public class TabelaINSSDAO {
 		return null;
 	}
 	
+	public Long findIdByVigencia(Date vigencia, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			Query query = em.createNamedQuery("TabelaINSS.findIdByVigencia", Long.class);
+			query.setParameter("vigencia", vigencia);
+			Long id = (Long) query.getSingleResult();
+			em.close();
+			return id;
+		}
+		catch (Exception e) {
+		}
+		em.close();
+		return null;
+	}
 }
