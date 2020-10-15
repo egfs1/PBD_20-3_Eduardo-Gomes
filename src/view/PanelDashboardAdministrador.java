@@ -48,6 +48,7 @@ public class PanelDashboardAdministrador extends JPanel {
 	private JMenuItem mntmEditMesDeReferencia;
 
 	private JMenuItem mntmCadMesDeReferencia;
+	private JMenuItem mntmGerarBackup;
 
 	
 	/**
@@ -146,6 +147,10 @@ public class PanelDashboardAdministrador extends JPanel {
 		mnOpcoes.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
 		mnOpcoes.setBounds(300,0,100, 32);
 		menuBar.add(mnOpcoes);
+		
+		mntmGerarBackup = new JMenuItem("Gerar Backup");
+		mntmGerarBackup.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
+		mnOpcoes.add(mntmGerarBackup);
 		
 		mntmDeslogar = new JMenuItem("Deslogar");
 		mntmDeslogar.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
@@ -256,6 +261,10 @@ public class PanelDashboardAdministrador extends JPanel {
 
 	public JMenuItem getMntmCadMesDeReferencia() {
 		return mntmCadMesDeReferencia;
+	}
+
+	public JMenuItem getMntmGerarBackup() {
+		return mntmGerarBackup;
 	}
 
 	public void mudarPanel(JPanel panel) {

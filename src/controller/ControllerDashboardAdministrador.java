@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import dao.GenericDAO;
 import model.Criptografar;
 import model.FormatarVigencia;
+import model.GerarBackup;
 import model.GerarSenha;
 import model.Pessoa;
 import tabelamodelos.TabelaMesDeReferenciaModel;
@@ -362,6 +363,17 @@ public class ControllerDashboardAdministrador {
 		});
 		
 		// OPÇÕES ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		tela.getMntmGerarBackup().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (JOptionPane.showConfirmDialog(null, "Você tem certeza que quer gerar o backup do banco de dados?")==0) {
+					GerarBackup.fazBackup();
+				}
+				
+			}
+		});
 		
 		tela.getMntmSair().addActionListener(new ActionListener() {
 			
