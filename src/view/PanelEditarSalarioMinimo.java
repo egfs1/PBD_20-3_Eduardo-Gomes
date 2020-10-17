@@ -26,12 +26,13 @@ public class PanelEditarSalarioMinimo extends JPanel {
 	private JButton btnDeletar;
 	
 	private TabelaSalarioMinimo tabela;
-	
+	private Long UserId;
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelEditarSalarioMinimo(TabelaSalarioMinimo tabela) {
+	public PanelEditarSalarioMinimo(TabelaSalarioMinimo tabela, Long UserId) {
+		this.UserId =UserId;
 		this.tabela = tabela;
 		
 		setBackground(SystemColor.inactiveCaption);
@@ -112,6 +113,16 @@ public class PanelEditarSalarioMinimo extends JPanel {
 
 	public TabelaSalarioMinimo getTabela() {
 		return tabela;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public Long getUserId() {
+		return UserId;
 	}
 	
 	

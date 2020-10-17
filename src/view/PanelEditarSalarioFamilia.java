@@ -27,11 +27,13 @@ public class PanelEditarSalarioFamilia extends JPanel {
 	private JButton btnDeletar;
 	
 	private TabelaSalarioFamilia tabela;
+	private Long UserId;
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelEditarSalarioFamilia(TabelaSalarioFamilia tabela) {
+	public PanelEditarSalarioFamilia(TabelaSalarioFamilia tabela, Long UserId) {
+		this.UserId = UserId;
 		this.tabela = tabela;
 		
 		setBackground(SystemColor.inactiveCaption);
@@ -127,6 +129,16 @@ public class PanelEditarSalarioFamilia extends JPanel {
 
 	public JButton getBtnDeletar() {
 		return btnDeletar;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public Long getUserId() {
+		return UserId;
 	}
 
 

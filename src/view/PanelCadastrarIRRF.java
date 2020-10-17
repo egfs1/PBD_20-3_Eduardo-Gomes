@@ -41,11 +41,15 @@ public class PanelCadastrarIRRF extends JPanel {
 	private JTextField textFieldAliquota5;
 	private JTextField textFieldValorDeduzir5;
 	
+	private Long UserId;
+	
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelCadastrarIRRF() {
+	public PanelCadastrarIRRF(Long UserId) {
+		this.UserId = UserId;
+		
 		setBackground(SystemColor.inactiveCaption);
 		setBounds(0, 32, 800, 568);
 		setLayout(null);
@@ -436,6 +440,16 @@ public class PanelCadastrarIRRF extends JPanel {
 
 	public JTextField getTextFieldValorDeduzir5() {
 		return textFieldValorDeduzir5;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public Long getUserId() {
+		return UserId;
 	}
 
 	

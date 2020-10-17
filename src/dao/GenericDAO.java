@@ -16,6 +16,7 @@ public class GenericDAO {
 	private static ValoresIRRFDAO virrfdao = new ValoresIRRFDAO();
 	private static TabelaIRRFDAO tirrfdao = new TabelaIRRFDAO();
 	private static MesDeReferenciaDAO mdrdao = new MesDeReferenciaDAO();
+	private static LogDAO logdao = new LogDAO();
 	
 	public static EntityManagerFactory getEmf() {
 		return emf;
@@ -56,6 +57,11 @@ public class GenericDAO {
 	public static MesDeReferenciaDAO getMdrdao() {
 		return mdrdao;
 	}
+
+	public static LogDAO getLogdao() {
+		return logdao;
+	}
+	
 	
 	
 

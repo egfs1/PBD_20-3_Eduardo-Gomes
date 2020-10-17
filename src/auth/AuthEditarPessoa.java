@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
+import log.LogPessoa;
 import model.Pessoa;
 import view.PanelEditar;
 
@@ -32,9 +33,13 @@ public class AuthEditarPessoa {
 		}
 			
 		Pessoa p = new Pessoa(nome, naturalidade, newQntFilhos, newDataNascimento, dataAdmissao, sindicalizado, funcao, tipo, newHorasSemanais, usuario, senha);
+		
 		p.setId(tela.getPessoa().getId());
 		GenericDAO.getPdao().merge(p, GenericDAO.getEmf());
 		JOptionPane.showMessageDialog(null, "Informações alteradas com sucesso!");
+		
+		Pessoa user = GenericDAO.getPdao().findID(tela.getIdUser(), GenericDAO.getEmf());
+		LogPessoa.logEditarPessoa(user, tela.getPessoa(), p);
 		
 	}
 	
@@ -47,6 +52,9 @@ public class AuthEditarPessoa {
 		p.setId(tela.getPessoa().getId());
 		GenericDAO.getPdao().merge(p, GenericDAO.getEmf());
 		JOptionPane.showMessageDialog(null, "Informações alteradas com sucesso!");
+		
+		Pessoa user = GenericDAO.getPdao().findID(tela.getIdUser(), GenericDAO.getEmf());
+		LogPessoa.logEditarPessoa(user, tela.getPessoa(), p);
 		
 	}
 	

@@ -6,11 +6,14 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import dao.GenericDAO;
+import log.Log;
+import log.LogResetSenha;
 import model.Criptografar;
 import model.FormatarVigencia;
 import model.GerarBackup;
 import model.GerarSenha;
 import model.Pessoa;
+import tabelamodelos.TabelaLogModel;
 import tabelamodelos.TabelaMesDeReferenciaModel;
 import tabelamodelos.TabelaPessoaModel;
 import tabelamodelos.TabelaSalarioFamiliaModel;
@@ -50,7 +53,7 @@ public class ControllerDashboardAdministrador {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tela.mudarPanel(new PanelCadastro());
+				tela.mudarPanel(new PanelCadastro(tela.getIDPessoa()));
 				System.gc();
 			}
 		});
@@ -59,7 +62,7 @@ public class ControllerDashboardAdministrador {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tela.mudarPanel(new PanelCadastrarSalarioMinimo());
+				tela.mudarPanel(new PanelCadastrarSalarioMinimo(tela.getIDPessoa()));
 				System.gc();
 			}
 		});
@@ -68,7 +71,7 @@ public class ControllerDashboardAdministrador {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tela.mudarPanel(new PanelCadastrarSalarioFamilia());
+				tela.mudarPanel(new PanelCadastrarSalarioFamilia(tela.getIDPessoa()));
 				System.gc();
 			}
 		});
@@ -77,7 +80,7 @@ public class ControllerDashboardAdministrador {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tela.mudarPanel(new PanelCadastrarINSS());
+				tela.mudarPanel(new PanelCadastrarINSS(tela.getIDPessoa()));
 				System.gc();
 			}
 		});
@@ -86,7 +89,7 @@ public class ControllerDashboardAdministrador {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tela.mudarPanel(new PanelCadastrarIRRF());
+				tela.mudarPanel(new PanelCadastrarIRRF(tela.getIDPessoa()));
 				System.gc();
 			}
 		});
@@ -95,7 +98,7 @@ public class ControllerDashboardAdministrador {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tela.mudarPanel(new PanelCadastrarMesDeReferencia());
+				tela.mudarPanel(new PanelCadastrarMesDeReferencia(tela.getIDPessoa()));
 				System.gc();
 			}
 		});
@@ -136,7 +139,7 @@ public class ControllerDashboardAdministrador {
 					
 					TabelaSalarioMinimo tabela = GenericDAO.getTsmdao().findByVigencia(vigencia, GenericDAO.getEmf());
 					if (tabela!=null) {
-						tela.mudarPanel(new PanelEditarSalarioMinimo(tabela));
+						tela.mudarPanel(new PanelEditarSalarioMinimo(tabela,tela.getIDPessoa()));
 						System.gc();
 						return;
 					}
@@ -160,7 +163,7 @@ public class ControllerDashboardAdministrador {
 				
 				TabelaSalarioFamilia tabela = GenericDAO.getTsfdao().findByVigencia(vigencia, GenericDAO.getEmf());
 				if (tabela!=null) {
-					tela.mudarPanel(new PanelEditarSalarioFamilia(tabela));
+					tela.mudarPanel(new PanelEditarSalarioFamilia(tabela,tela.getIDPessoa()));
 					System.gc();
 					return;
 				}
@@ -188,7 +191,7 @@ public class ControllerDashboardAdministrador {
 					ValoresINSS valor3 = GenericDAO.getVinssdao().findID(tabela.getIdValorINSS3(), GenericDAO.getEmf());
 					ValoresINSS valor4 = GenericDAO.getVinssdao().findID(tabela.getIdValorINSS4(), GenericDAO.getEmf());
 					
-					tela.mudarPanel(new PanelEditarINSS(tabela, valor1, valor2, valor3, valor4));
+					tela.mudarPanel(new PanelEditarINSS(tabela, valor1, valor2, valor3, valor4,tela.getIDPessoa()));
 					System.gc();
 					return;
 				}
@@ -219,7 +222,7 @@ public class ControllerDashboardAdministrador {
 					ValoresIRRF valor4 = GenericDAO.getVirrfdao().findID(tabela.getIdValorIRRF4(), GenericDAO.getEmf());
 					ValoresIRRF valor5 = GenericDAO.getVirrfdao().findID(tabela.getIdValorIRRF5(), GenericDAO.getEmf());
 					
-					tela.mudarPanel(new PanelEditarIRRF(tabela, valor1, valor2, valor3, valor4, valor5));
+					tela.mudarPanel(new PanelEditarIRRF(tabela, valor1, valor2, valor3, valor4, valor5,tela.getIDPessoa()));
 					System.gc();
 					return;
 				}
@@ -244,7 +247,7 @@ public class ControllerDashboardAdministrador {
 				MesDeReferencia mes = GenericDAO.getMdrdao().findByVigencia(vigencia, GenericDAO.getEmf());
 				
 				if (mes!=null) {
-					tela.mudarPanel(new PanelEditarMesDeReferencia(mes));
+					tela.mudarPanel(new PanelEditarMesDeReferencia(mes,tela.getIDPessoa()));
 					System.gc();
 					return;
 				}
@@ -268,6 +271,9 @@ public class ControllerDashboardAdministrador {
 						
 						buscarUsuario.setSenha(Criptografar.criptografar(senhaGerada));
 						GenericDAO.getPdao().merge(buscarUsuario, GenericDAO.getEmf());
+						
+						Pessoa user = GenericDAO.getPdao().findID(tela.getIDPessoa(), GenericDAO.getEmf());
+						LogResetSenha.logFazerResetSenha(user, buscarUsuario);
 						
 						JOptionPane.showMessageDialog(null, "Senha alterada com sucesso!\n" + "Nova Senha: " + senhaGerada + "\nCertifique-se de copiar a senha antes de apertar OK!");
 						return;
@@ -359,6 +365,19 @@ public class ControllerDashboardAdministrador {
 				TabelaMesDeReferenciaModel tableModel = new TabelaMesDeReferenciaModel(dados);
 				tela.mudarPanel(new PanelTabela(tableModel, "Mês de Referencia", MesDeReferencia.columnsSize()));
 				System.gc();
+			}
+		});
+		
+		tela.getMntmTabelaLog().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				List<Log> dados = GenericDAO.getLogdao().findAll(GenericDAO.getEmf());
+				TabelaLogModel tableModel = new TabelaLogModel(dados);
+				tela.mudarPanel(new PanelTabela(tableModel, "Log das Tabelas", Log.columnsSize()));
+				System.gc();
+				
 			}
 		});
 		

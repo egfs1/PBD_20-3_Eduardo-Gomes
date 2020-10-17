@@ -22,11 +22,14 @@ public class PanelCadastrarSalarioMinimo extends JPanel {
 	private JTextField textFieldValor;
 	private JButton btnSalvar;
 	
+	private Long UserId;
+	
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelCadastrarSalarioMinimo() {
+	public PanelCadastrarSalarioMinimo(Long UserId) {
+		this.UserId = UserId;
 		setBackground(SystemColor.inactiveCaption);
 		setBounds(0, 32, 800, 568);
 		setLayout(null);
@@ -89,6 +92,16 @@ public class PanelCadastrarSalarioMinimo extends JPanel {
 
 	public JButton getBtnSalvar() {
 		return btnSalvar;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public Long getUserId() {
+		return UserId;
 	}
 	
 	

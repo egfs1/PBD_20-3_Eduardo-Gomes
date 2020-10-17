@@ -8,6 +8,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
 import auth.AuthCadastrarIRRF;
+import dao.GenericDAO;
+import model.Pessoa;
 import view.PanelCadastrarIRRF;
 
 public class ControllerCadastrarIRRF {
@@ -46,12 +48,13 @@ public class ControllerCadastrarIRRF {
 				String aliquota5 = tela.getTextFieldAliquota5().getText().intern();
 				String valorDeduzir5 = tela.getTextFieldValorDeduzir5().getText().intern();
 				
+				Pessoa pessoa = GenericDAO.getPdao().findID(tela.getUserId(), GenericDAO.getEmf());
 				
 				if (AuthCadastrarIRRF.authIRRF(vigencia, valorMinimo1, valorMaximo1, aliquota1, valorDeduzir1, 
 						valorMinimo2, valorMaximo2, aliquota2, valorDeduzir2, 
 						valorMinimo3, valorMaximo3, aliquota3, valorDeduzir3, 
 						valorMinimo4, valorMaximo4, aliquota4, valorDeduzir4, 
-						valorMinimo5, valorMaximo5, aliquota5, valorDeduzir5)) {
+						valorMinimo5, valorMaximo5, aliquota5, valorDeduzir5, pessoa)) {
 					limparCampos(tela);
 				}
 				

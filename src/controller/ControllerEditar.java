@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 
 import auth.AuthEditarPessoa;
 import dao.GenericDAO;
+import log.LogPessoa;
+import model.Pessoa;
 import view.PanelEditar;
 
 public class ControllerEditar {
@@ -40,6 +42,9 @@ public class ControllerEditar {
 					if (!(tela.getPessoa().getId()==tela.getIdUser())) {
 						GenericDAO.getPdao().remove(tela.getPessoa(), GenericDAO.getEmf());
 						JOptionPane.showMessageDialog(null, "Funcionário deletado com sucesso!");
+						
+						Pessoa user = GenericDAO.getPdao().findID(tela.getIdUser(), GenericDAO.getEmf());
+						LogPessoa.logDeletarPessoa(user, tela.getPessoa());
 					}else {
 						JOptionPane.showMessageDialog(null, "Você não pode deletar o usuario que está usando!");
 					}

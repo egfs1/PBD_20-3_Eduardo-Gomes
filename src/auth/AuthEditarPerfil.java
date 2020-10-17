@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
+import log.LogPessoa;
 import model.Criptografar;
 import view.PanelEditarPerfil;
 
@@ -32,6 +33,8 @@ public class AuthEditarPerfil {
 		tela.getPessoa().setSenha(Criptografar.criptografar(novaSenha));
 		
 		GenericDAO.getPdao().merge(tela.getPessoa(), GenericDAO.getEmf());
+		
+		LogPessoa.logEditarPerfil(tela.getPessoa());
 		
 		JOptionPane.showMessageDialog(null, "Informações alteradas com sucesso!");
 	}

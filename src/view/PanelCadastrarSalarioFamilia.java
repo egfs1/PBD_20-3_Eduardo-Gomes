@@ -23,11 +23,15 @@ public class PanelCadastrarSalarioFamilia extends JPanel {
 	private JButton btnSalvar;
 	private JTextField textFieldValor;
 	
+	private Long UserId;
+	
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelCadastrarSalarioFamilia() {
+	public PanelCadastrarSalarioFamilia(Long UserId) {
+		this.UserId = UserId;
+		
 		setBackground(SystemColor.inactiveCaption);
 		setBounds(0, 32, 800, 568);
 		setLayout(null);
@@ -106,6 +110,16 @@ public class PanelCadastrarSalarioFamilia extends JPanel {
 
 	public JTextField getTextFieldValor() {
 		return textFieldValor;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public Long getUserId() {
+		return UserId;
 	}
 
 

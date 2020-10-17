@@ -5,11 +5,13 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
+import log.LogSalarioMinimo;
+import model.Pessoa;
 import tabelasconfig.TabelaSalarioMinimo;
 
 public class authEditarSalarioMinimo {
 	
-	public static void authSalarioMinimo(Long id, Date vigencia, String valor) {
+	public static void authSalarioMinimo(Long id, Date vigencia, String valor, Pessoa pessoa) {
 		
 		try {
 			double newValor = Double.parseDouble(valor);
@@ -18,6 +20,8 @@ public class authEditarSalarioMinimo {
 			tabela.setId(id);
 			
 			GenericDAO.getTsmdao().merge(tabela, GenericDAO.getEmf());
+			
+			LogSalarioMinimo.logEditarSalarioMinimo(pessoa, tabela);
 			
 			JOptionPane.showMessageDialog(null, "Tabela Atualizada com sucesso!");
 			

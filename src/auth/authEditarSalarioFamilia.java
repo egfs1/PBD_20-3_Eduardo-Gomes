@@ -5,11 +5,13 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
+import log.LogSalarioFamilia;
+import model.Pessoa;
 import tabelasconfig.TabelaSalarioFamilia;
 
 public class authEditarSalarioFamilia {
 	
-	public static void authSalarioFamilia(Long id, Date vigencia,String remuneracao, String valor) {
+	public static void authSalarioFamilia(Long id, Date vigencia,String remuneracao, String valor, Pessoa pessoa) {
 		
 		try {
 			double newRemuneracao = Double.parseDouble(remuneracao);
@@ -19,6 +21,8 @@ public class authEditarSalarioFamilia {
 			tabela.setId(id);
 			
 			GenericDAO.getTsfdao().merge(tabela, GenericDAO.getEmf());
+			
+			LogSalarioFamilia.logEditarSalarioFamilia(pessoa, tabela);
 			
 			JOptionPane.showMessageDialog(null, "Tabela Atualizada com sucesso!");
 			

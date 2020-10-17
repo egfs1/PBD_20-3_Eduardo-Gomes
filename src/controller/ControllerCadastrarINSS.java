@@ -8,6 +8,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
 import auth.AuthCadastrarINSS;
+import dao.GenericDAO;
+import model.Pessoa;
 import view.PanelCadastrarINSS;
 
 public class ControllerCadastrarINSS {
@@ -37,11 +39,12 @@ public class ControllerCadastrarINSS {
 				String valorMaximo4 = tela.getTextFieldValorMaximo4().getText().intern();
 				String aliquota4 = tela.getTextFieldAliquota4().getText().intern();
 				
+				Pessoa pessoa = GenericDAO.getPdao().findID(tela.getUserId(), GenericDAO.getEmf());
 				
 				if (AuthCadastrarINSS.authINSS(vigencia, valorMinimo1, valorMaximo1, aliquota1, 
 						valorMinimo2, valorMaximo2, aliquota2, 
 						valorMinimo3, valorMaximo3, aliquota3, 
-						valorMinimo4, valorMaximo4, aliquota4)) {
+						valorMinimo4, valorMaximo4, aliquota4, pessoa)) {
 					limparCampos(tela);
 				}
 				

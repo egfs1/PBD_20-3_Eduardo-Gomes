@@ -5,7 +5,9 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
+import log.LogTabelaIRRF;
 import model.FormatarVigencia;
+import model.Pessoa;
 import tabelasconfig.TabelaIRRF;
 import tabelasconfig.ValoresIRRF;
 
@@ -15,7 +17,7 @@ public class AuthCadastrarIRRF {
 			String valorMinimo2, String valorMaximo2, String aliquota2, String valorDeduzir2, 
 			String valorMinimo3, String valorMaximo3, String aliquota3, String valorDeduzir3, 
 			String valorMinimo4, String valorMaximo4, String aliquota4, String valorDeduzir4,
-			String valorMinimo5, String valorMaximo5, String aliquota5, String valorDeduzir5) {
+			String valorMinimo5, String valorMaximo5, String aliquota5, String valorDeduzir5, Pessoa pessoa) {
 		
 		try {
 			
@@ -70,6 +72,9 @@ public class AuthCadastrarIRRF {
 			TabelaIRRF tabela = new TabelaIRRF(newVigencia, v1.getId(), v2.getId(), v3.getId(), v4.getId(), v5.getId());
 			
 			if (GenericDAO.getTirrfdao().persist(tabela, GenericDAO.getEmf())) {
+				
+				LogTabelaIRRF.logCadastrarTabelaIRRF(pessoa, tabela);
+				
 				JOptionPane.showMessageDialog(null, "Vigência Cadastrada com sucesso!");
 				return true;
 			}

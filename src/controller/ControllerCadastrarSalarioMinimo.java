@@ -8,6 +8,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
 import auth.AuthCadastrarSalarioMinimo;
+import dao.GenericDAO;
+import model.Pessoa;
 import view.PanelCadastrarSalarioMinimo;
 
 public class ControllerCadastrarSalarioMinimo {
@@ -22,7 +24,9 @@ public class ControllerCadastrarSalarioMinimo {
 				String vigencia = tela.getTextFieldVigencia().getText().intern();
 				String valor = tela.getTextFieldValor().getText().intern();
 				
-				if (AuthCadastrarSalarioMinimo.authSalarioMinimo(vigencia, valor)) {
+				Pessoa pessoa = GenericDAO.getPdao().findID(tela.getUserId(), GenericDAO.getEmf());
+				
+				if (AuthCadastrarSalarioMinimo.authSalarioMinimo(vigencia, valor, pessoa)) {
 					limparCampos(tela);
 				}
 				

@@ -6,6 +6,8 @@ import javax.swing.JOptionPane;
 
 import auth.AuthEditarINSS;
 import dao.GenericDAO;
+import log.LogTabelaINSS;
+import model.Pessoa;
 import view.PanelEditarINSS;
 
 public class ControllerEditarINSS {
@@ -18,7 +20,11 @@ public class ControllerEditarINSS {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja deletar essa vigência do INSS?", "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE)==0) {
 					GenericDAO.getTinssdao().remove(tela.getTabela(), GenericDAO.getEmf());
-					JOptionPane.showMessageDialog(null, "Funcionário deletado com sucesso!");
+					
+					Pessoa pessoa = GenericDAO.getPdao().findID(tela.getUserId(), GenericDAO.getEmf());
+					LogTabelaINSS.logDeletarTabelaINSS(pessoa, tela.getTabela());
+					
+					JOptionPane.showMessageDialog(null, "Vigência do INSS deletada com sucesso!");
 				}
 			}
 		});
@@ -46,7 +52,9 @@ public class ControllerEditarINSS {
 					String valorMaximo4 = tela.getTextFieldValorMaximo4().getText().intern();
 					String aliquota4 = tela.getTextFieldAliquota4().getText().intern();
 					
-					AuthEditarINSS.authINSS(tela.getTabela(), valorMinimo1, valorMaximo1, aliquota1, valorMinimo2, valorMaximo2, aliquota2, valorMinimo3, valorMaximo3, aliquota3, valorMinimo4, valorMaximo4, aliquota4);
+					Pessoa pessoa = GenericDAO.getPdao().findID(tela.getUserId(), GenericDAO.getEmf());
+					
+					AuthEditarINSS.authINSS(tela.getTabela(), valorMinimo1, valorMaximo1, aliquota1, valorMinimo2, valorMaximo2, aliquota2, valorMinimo3, valorMaximo3, aliquota3, valorMinimo4, valorMaximo4, aliquota4, pessoa);
 				
 				}
 			}

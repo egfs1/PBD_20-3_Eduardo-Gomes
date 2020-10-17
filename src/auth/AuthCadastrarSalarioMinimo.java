@@ -5,12 +5,14 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
+import log.LogSalarioMinimo;
 import model.FormatarVigencia;
+import model.Pessoa;
 import tabelasconfig.TabelaSalarioMinimo;
 
 public class AuthCadastrarSalarioMinimo {
 	
-	public static boolean authSalarioMinimo(String vigencia, String valor) {
+	public static boolean authSalarioMinimo(String vigencia, String valor, Pessoa pessoa) {
 		
 		try {
 			
@@ -22,9 +24,12 @@ public class AuthCadastrarSalarioMinimo {
 			Date newVigencia = FormatarVigencia.formatToDate(vigencia);
 			double newValor = Double.parseDouble(valor);
 			
-			TabelaSalarioMinimo s = new TabelaSalarioMinimo(newVigencia, newValor);
+			TabelaSalarioMinimo tabela = new TabelaSalarioMinimo(newVigencia, newValor);
 			
-			if (GenericDAO.getTsmdao().persist(s, GenericDAO.getEmf())) {
+			if (GenericDAO.getTsmdao().persist(tabela, GenericDAO.getEmf())) {
+				
+				LogSalarioMinimo.logCadastrarSalarioMinimo(pessoa, tabela);
+				
 				JOptionPane.showMessageDialog(null, "Vigência Cadastrada com sucesso!");
 				return true;
 			}

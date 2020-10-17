@@ -5,12 +5,14 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
+import log.LogMesDeReferencia;
 import model.FormatarVigencia;
+import model.Pessoa;
 import tabelasconfig.MesDeReferencia;
 
 public class AuthCadastrarMesDeReferencia {
 	
-	public static void authMesDeReferencia(String vigencia) {
+	public static void authMesDeReferencia(String vigencia, Pessoa pessoa) {
 		
 		try {
 			
@@ -31,6 +33,9 @@ public class AuthCadastrarMesDeReferencia {
 				MesDeReferencia mes = new MesDeReferencia(newVigencia, idSalarioMinimo, idInss, idIrrf, idSalarioFamilia);
 				
 				if (GenericDAO.getMdrdao().persist(mes, GenericDAO.getEmf())) {
+					
+					LogMesDeReferencia.logCadastrarMesDeReferencia(pessoa, mes);
+					
 					JOptionPane.showMessageDialog(null, "Mês de Referência gerado com sucesso!");
 					return;
 				}

@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 
 import auth.AuthEditarIRRF;
 import dao.GenericDAO;
+import log.LogTabelaIRRF;
+import model.Pessoa;
 import view.PanelEditarIRRF;
 
 public class ControllerEditarIRRF {
@@ -19,7 +21,11 @@ public class ControllerEditarIRRF {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja deletar essa vigência do IRRF?", "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE)==0) {
 					GenericDAO.getTirrfdao().remove(tela.getTabela(), GenericDAO.getEmf());
-					JOptionPane.showMessageDialog(null, "Funcionário deletado com sucesso!");
+					
+					Pessoa pessoa = GenericDAO.getPdao().findID(tela.getUserId(), GenericDAO.getEmf());
+					LogTabelaIRRF.logDeletarTabelaIRRF(pessoa, tela.getTabela());
+					
+					JOptionPane.showMessageDialog(null, "Vigência do IRRF deletada com sucesso!");
 				}
 			}
 		});
@@ -56,7 +62,9 @@ public class ControllerEditarIRRF {
 					String aliquota5 = tela.getTextFieldAliquota5().getText().intern();
 					String valorDeduzir5 = tela.getTextFieldValorDeduzir5().getText().intern();
 					
-					AuthEditarIRRF.authIRRF(tela.getTabela(), valorMinimo1, valorMaximo1, aliquota1, valorDeduzir1, valorMinimo2, valorMaximo2, aliquota2, valorDeduzir2, valorMinimo3, valorMaximo3, aliquota3, valorDeduzir3, valorMinimo4, valorMaximo4, aliquota4, valorDeduzir4, valorMinimo5, valorMaximo5, aliquota5, valorDeduzir5);
+					Pessoa pessoa = GenericDAO.getPdao().findID(tela.getUserId(), GenericDAO.getEmf());
+					
+					AuthEditarIRRF.authIRRF(tela.getTabela(), valorMinimo1, valorMaximo1, aliquota1, valorDeduzir1, valorMinimo2, valorMaximo2, aliquota2, valorDeduzir2, valorMinimo3, valorMaximo3, aliquota3, valorDeduzir3, valorMinimo4, valorMaximo4, aliquota4, valorDeduzir4, valorMinimo5, valorMaximo5, aliquota5, valorDeduzir5, pessoa);
 				}
 			}
 		});

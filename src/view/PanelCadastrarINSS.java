@@ -33,11 +33,14 @@ public class PanelCadastrarINSS extends JPanel {
 	private JTextField textFieldValorMaximo4;
 	private JTextField textFieldAliquota4;
 	
+	private Long UserId;
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelCadastrarINSS() {
+	public PanelCadastrarINSS(Long UserId) {
+		this.UserId = UserId;
+		
 		setBackground(SystemColor.inactiveCaption);
 		setBounds(0, 32, 800, 568);
 		setLayout(null);
@@ -294,6 +297,16 @@ public class PanelCadastrarINSS extends JPanel {
 
 	public JTextField getTextFieldAliquota4() {
 		return textFieldAliquota4;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public Long getUserId() {
+		return UserId;
 	}
 
 	

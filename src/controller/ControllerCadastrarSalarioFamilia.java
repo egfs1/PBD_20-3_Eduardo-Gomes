@@ -8,6 +8,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
 import auth.AuthCadastrarSalarioFamilia;
+import dao.GenericDAO;
+import model.Pessoa;
 import view.PanelCadastrarSalarioFamilia;
 
 public class ControllerCadastrarSalarioFamilia {
@@ -23,7 +25,9 @@ public class ControllerCadastrarSalarioFamilia {
 				String valor = tela.getTextFieldValor().getText().intern();
 				String remuneracao = tela.getTextFieldRemuneracao().getText().intern();
 				
-				if (AuthCadastrarSalarioFamilia.authSalarioFamilia(vigencia, remuneracao, valor)) {
+				Pessoa pessoa = GenericDAO.getPdao().findID(tela.getUserId(), GenericDAO.getEmf());
+				
+				if (AuthCadastrarSalarioFamilia.authSalarioFamilia(vigencia, remuneracao, valor, pessoa)) {
 					limparCampos(tela);
 				}
 				

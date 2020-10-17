@@ -3,6 +3,7 @@ package auth;
 import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
+import log.LogResetSenha;
 import model.Pessoa;
 
 public class AuthEsqueceuSenha {
@@ -18,6 +19,9 @@ public class AuthEsqueceuSenha {
 		
 		if (p!=null) {
 			if (GenericDAO.getRdao().persist(p.getId(), GenericDAO.getEmf())) {
+				
+				LogResetSenha.logSolicitarResetSenha(p);
+				
 				JOptionPane.showMessageDialog(null, "Reset da senha solicitado com sucesso!");
 				return;
 			}

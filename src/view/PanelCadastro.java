@@ -32,11 +32,15 @@ public class PanelCadastro extends JPanel {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 	private final ButtonGroup buttonGroup_2 = new ButtonGroup();
+	
+	private Long idUser;
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelCadastro() {
+	public PanelCadastro(Long idUser) {
+		this.idUser = idUser;
+		
 		setBackground(SystemColor.activeCaption);
 		setBounds(0, 32, 800, 568);
 		setLayout(null);
@@ -97,18 +101,10 @@ public class PanelCadastro extends JPanel {
 		lblQntFilhos.setBounds(20, 360, 192, 14);
 		add(lblQntFilhos);
 		
-		MaskFormatter masknumber;
-		try {
-			masknumber = new MaskFormatter("##");
-			formattedTextFieldFilhos = new JFormattedTextField(masknumber);
-			masknumber.setValidCharacters("0123456789");
-			formattedTextFieldFilhos.setColumns(10);
-			formattedTextFieldFilhos.setBounds(20, 390, 90, 30);
-			add(formattedTextFieldFilhos);
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		formattedTextFieldFilhos = new JFormattedTextField();
+		formattedTextFieldFilhos.setColumns(10);
+		formattedTextFieldFilhos.setBounds(20, 390, 90, 30);
+		add(formattedTextFieldFilhos);
 		
 		
 		try {
@@ -180,17 +176,11 @@ public class PanelCadastro extends JPanel {
 		lblHoras.setBounds(410, 280, 163, 14);
 		add(lblHoras);
 		
-		try {
-			masknumber = new MaskFormatter("##");
-			formattedTextFieldHoras = new JFormattedTextField(masknumber);
-			formattedTextFieldHoras.setEnabled(false);
-			formattedTextFieldHoras.setColumns(10);
-			formattedTextFieldHoras.setBounds(410, 310, 90, 30);
-			add(formattedTextFieldHoras);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		formattedTextFieldHoras = new JFormattedTextField();
+		formattedTextFieldHoras.setEnabled(false);
+		formattedTextFieldHoras.setColumns(10);
+		formattedTextFieldHoras.setBounds(410, 310, 90, 30);
+		add(formattedTextFieldHoras);
 		
 		JLabel lblUsuario = new JLabel("Nome de Usuario");
 		lblUsuario.setForeground(Color.WHITE);
@@ -312,6 +302,16 @@ public class PanelCadastro extends JPanel {
 	public JRadioButton getRdbtnComum() {
 		return rdbtnComum;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Long getIdUser() {
+		return idUser;
+	}
+	
+	
 	
 	
 }

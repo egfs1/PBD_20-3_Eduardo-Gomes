@@ -50,6 +50,8 @@ public class PanelDashboardAdministrador extends JPanel {
 	private JMenuItem mntmCadMesDeReferencia;
 	private JMenuItem mntmGerarBackup;
 
+	private JMenuItem mntmTabelaLog;
+
 	
 	/**
 	 * Create the panel.
@@ -142,6 +144,9 @@ public class PanelDashboardAdministrador extends JPanel {
 		
 		mntmTabelaMesDeReferencia = new JMenuItem("M\u00EAs de Referencia");
 		mnTabelas.add(mntmTabelaMesDeReferencia);
+		
+		mntmTabelaLog = new JMenuItem("Tabela Log");
+		mnTabelas.add(mntmTabelaLog);
 		
 		JMenu mnOpcoes = new JMenu("Op\u00E7\u00F5es");
 		mnOpcoes.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
@@ -265,6 +270,14 @@ public class PanelDashboardAdministrador extends JPanel {
 
 	public JMenuItem getMntmGerarBackup() {
 		return mntmGerarBackup;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public JMenuItem getMntmTabelaLog() {
+		return mntmTabelaLog;
 	}
 
 	public void mudarPanel(JPanel panel) {

@@ -23,8 +23,10 @@ public class PanelEditarMesDeReferencia extends JPanel {
 	private JTextField textField;
 	private JButton btnDeletar;
 	private MesDeReferencia mes;
+	private Long UserId;
 
-	public PanelEditarMesDeReferencia(MesDeReferencia mes) {
+	public PanelEditarMesDeReferencia(MesDeReferencia mes, Long UserId) {
+		this.UserId = UserId;
 		this.mes = mes;
 		setBackground(SystemColor.inactiveCaption);
 		setBounds(0, 32, 800, 568);
@@ -78,6 +80,14 @@ public class PanelEditarMesDeReferencia extends JPanel {
 
 	public MesDeReferencia getMes() {
 		return mes;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Long getUserId() {
+		return UserId;
 	}
 	
 	

@@ -3,6 +3,8 @@ package auth;
 import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
+import log.LogTabelaINSS;
+import model.Pessoa;
 import tabelasconfig.TabelaINSS;
 import tabelasconfig.ValoresINSS;
 
@@ -11,7 +13,7 @@ public class AuthEditarINSS {
 	public static void authINSS(TabelaINSS tabelaAntiga,String valorMinimo1, String valorMaximo1, String aliquota1, 
 			String valorMinimo2, String valorMaximo2, String aliquota2, 
 			String valorMinimo3, String valorMaximo3, String aliquota3, 
-			String valorMinimo4, String valorMaximo4, String aliquota4) {
+			String valorMinimo4, String valorMaximo4, String aliquota4, Pessoa pessoa) {
 		
 		try {
 			
@@ -59,6 +61,9 @@ public class AuthEditarINSS {
 			tabela.setId(tabelaAntiga.getId());
 			
 			GenericDAO.getTinssdao().merge(tabela, GenericDAO.getEmf());
+			
+			LogTabelaINSS.logEditarTabelaINSS(pessoa, tabela);
+			
 			JOptionPane.showMessageDialog(null, "Vigência Cadastrada com sucesso!");
 			
 		}catch(Exception e) {

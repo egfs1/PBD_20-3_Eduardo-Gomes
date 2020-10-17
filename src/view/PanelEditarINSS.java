@@ -39,11 +39,14 @@ public class PanelEditarINSS extends JPanel {
 	
 	private TabelaINSS tabela;
 	
+	private Long UserId;
+	
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelEditarINSS(TabelaINSS tabela,ValoresINSS valor1, ValoresINSS valor2, ValoresINSS valor3, ValoresINSS valor4) {
+	public PanelEditarINSS(TabelaINSS tabela,ValoresINSS valor1, ValoresINSS valor2, ValoresINSS valor3, ValoresINSS valor4, Long UserId) {
+		this.UserId = UserId;
 		this.tabela = tabela;
 		
 		setBackground(SystemColor.inactiveCaption);
@@ -297,6 +300,16 @@ public class PanelEditarINSS extends JPanel {
 
 	public JTextField getTextFieldValorMinimo4() {
 		return textFieldValorMinimo4;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public Long getUserId() {
+		return UserId;
 	}
 
 

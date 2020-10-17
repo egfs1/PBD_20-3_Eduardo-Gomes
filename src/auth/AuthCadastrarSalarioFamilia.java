@@ -5,12 +5,14 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
+import log.LogSalarioFamilia;
 import model.FormatarVigencia;
+import model.Pessoa;
 import tabelasconfig.TabelaSalarioFamilia;
 
 public class AuthCadastrarSalarioFamilia {
 	
-	public static boolean authSalarioFamilia(String vigencia,String remuneracao, String valor) {
+	public static boolean authSalarioFamilia(String vigencia,String remuneracao, String valor, Pessoa pessoa) {
 		
 		try {
 			
@@ -23,9 +25,12 @@ public class AuthCadastrarSalarioFamilia {
 			double newRemuneracao = Double.parseDouble(remuneracao);
 			double newValor = Double.parseDouble(valor);
 			
-			TabelaSalarioFamilia s = new TabelaSalarioFamilia(newVigencia,newRemuneracao, newValor);
+			TabelaSalarioFamilia tabela = new TabelaSalarioFamilia(newVigencia,newRemuneracao, newValor);
 			
-			if (GenericDAO.getTsfdao().persist(s, GenericDAO.getEmf())) {
+			if (GenericDAO.getTsfdao().persist(tabela, GenericDAO.getEmf())) {
+				
+				LogSalarioFamilia.logCadastrarSalarioFamilia(pessoa, tabela);
+				
 				JOptionPane.showMessageDialog(null, "Vigência Cadastrada com sucesso!");
 				return true;
 			}

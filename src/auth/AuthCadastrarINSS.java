@@ -5,7 +5,9 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
+import log.LogTabelaINSS;
 import model.FormatarVigencia;
+import model.Pessoa;
 import tabelasconfig.TabelaINSS;
 import tabelasconfig.ValoresINSS;
 
@@ -14,7 +16,7 @@ public class AuthCadastrarINSS {
 	public static boolean authINSS(String vigencia,String valorMinimo1, String valorMaximo1, String aliquota1, 
 			String valorMinimo2, String valorMaximo2, String aliquota2, 
 			String valorMinimo3, String valorMaximo3, String aliquota3, 
-			String valorMinimo4, String valorMaximo4, String aliquota4) {
+			String valorMinimo4, String valorMaximo4, String aliquota4, Pessoa pessoa) {
 		
 		try {
 			
@@ -57,6 +59,10 @@ public class AuthCadastrarINSS {
 			TabelaINSS tabela = new TabelaINSS(newVigencia, v1.getId(), v2.getId(), v3.getId(), v4.getId());
 			
 			if (GenericDAO.getTinssdao().persist(tabela, GenericDAO.getEmf())) {
+				
+				
+				LogTabelaINSS.logCadastrarTabelaINSS(pessoa, tabela);
+				
 				JOptionPane.showMessageDialog(null, "Vigência Cadastrada com sucesso!");
 				return true;
 			}

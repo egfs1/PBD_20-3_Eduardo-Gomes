@@ -21,8 +21,12 @@ public class PanelCadastrarMesDeReferencia extends JPanel {
 	
 	private JTextField textField;
 	private JButton btnSalvar;
+	
+	private Long UserId;
 
-	public PanelCadastrarMesDeReferencia() {
+	public PanelCadastrarMesDeReferencia(Long UserId) {
+		this.UserId = UserId;
+		
 		setBackground(SystemColor.inactiveCaption);
 		setBounds(0, 32, 800, 568);
 		setLayout(null);
@@ -66,6 +70,14 @@ public class PanelCadastrarMesDeReferencia extends JPanel {
 
 	public JButton getBtnSalvar() {
 		return btnSalvar;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Long getUserId() {
+		return UserId;
 	}
 	
 	

@@ -45,11 +45,14 @@ public class PanelEditarIRRF extends JPanel {
 	private JTextField textFieldValorDeduzir5;
 	
 	private TabelaIRRF tabela;
+	
+	private Long UserId;
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelEditarIRRF(TabelaIRRF tabela, ValoresIRRF valor1, ValoresIRRF valor2, ValoresIRRF valor3, ValoresIRRF valor4, ValoresIRRF valor5) {
+	public PanelEditarIRRF(TabelaIRRF tabela, ValoresIRRF valor1, ValoresIRRF valor2, ValoresIRRF valor3, ValoresIRRF valor4, ValoresIRRF valor5, Long UserId) {
+		this.UserId = UserId;
 		this.tabela = tabela;
 		
 		setBackground(SystemColor.inactiveCaption);
@@ -458,6 +461,16 @@ public class PanelEditarIRRF extends JPanel {
 
 	public TabelaIRRF getTabela() {
 		return tabela;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public Long getUserId() {
+		return UserId;
 	}
 
 	

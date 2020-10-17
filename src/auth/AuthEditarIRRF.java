@@ -4,6 +4,8 @@ package auth;
 import javax.swing.JOptionPane;
 
 import dao.GenericDAO;
+import log.LogTabelaIRRF;
+import model.Pessoa;
 import tabelasconfig.TabelaIRRF;
 import tabelasconfig.ValoresIRRF;
 
@@ -13,7 +15,7 @@ public class AuthEditarIRRF {
 			String valorMinimo2, String valorMaximo2, String aliquota2, String valorDeduzir2 , 
 			String valorMinimo3, String valorMaximo3, String aliquota3, String valorDeduzir3 , 
 			String valorMinimo4, String valorMaximo4, String aliquota4, String valorDeduzir4 ,
-			String valorMinimo5, String valorMaximo5, String aliquota5, String valorDeduzir5) {
+			String valorMinimo5, String valorMaximo5, String aliquota5, String valorDeduzir5, Pessoa pessoa) {
 		
 		try {
 			
@@ -74,6 +76,9 @@ public class AuthEditarIRRF {
 			tabela.setId(tabelaAntiga.getId());
 			
 			GenericDAO.getTirrfdao().merge(tabela, GenericDAO.getEmf());
+			
+			LogTabelaIRRF.logEditarTabelaIRRF(pessoa, tabela);
+			
 			JOptionPane.showMessageDialog(null, "Vigência Cadastrada com sucesso!");
 			
 		}catch(Exception e) {

@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 
 import auth.authEditarSalarioFamilia;
 import dao.GenericDAO;
+import log.LogSalarioFamilia;
+import model.Pessoa;
 import view.PanelEditarSalarioFamilia;
 
 public class ControllerEditarSalarioFamilia {
@@ -20,7 +22,11 @@ public class ControllerEditarSalarioFamilia {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja deletar essa vigência do salario família?", "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE)==0) {
 					GenericDAO.getTsfdao().remove(tela.getTabela(), GenericDAO.getEmf());
-					JOptionPane.showMessageDialog(null, "Funcionário deletado com sucesso!");
+					
+					Pessoa pessoa = GenericDAO.getPdao().findID(tela.getUserId(), GenericDAO.getEmf());
+					LogSalarioFamilia.logDeletarSalarioFamilia(pessoa, tela.getTabela());
+					
+					JOptionPane.showMessageDialog(null, "Vigência do salario familia deletado com sucesso!");
 				}
 			}
 		});
@@ -37,7 +43,9 @@ public class ControllerEditarSalarioFamilia {
 					String remuneracao = tela.getTextFieldRemuneracao().getText().intern();
 					String valor = tela.getTextFieldValor().getText().intern();
 					
-					authEditarSalarioFamilia.authSalarioFamilia(id, vigencia, remuneracao, valor);
+					Pessoa pessoa = GenericDAO.getPdao().findID(tela.getUserId(), GenericDAO.getEmf());
+					
+					authEditarSalarioFamilia.authSalarioFamilia(id, vigencia, remuneracao, valor, pessoa);
 					
 				}
 				

@@ -108,14 +108,12 @@ public class ControllerCadastrar {
 				
 				String usuario = tela.getTextFieldUsuario().getText().intern();
 				
-				
-				
 				if(allButtonsSelected) {
 					if (funcao!="Comum") {
-						AuthCadastrarPessoa.authPessoaUsuario(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, usuario);
+						AuthCadastrarPessoa.authPessoaUsuario(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, usuario, tela.getIdUser());
 					}
 					else {
-						AuthCadastrarPessoa.authPessoaComum(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString);
+						AuthCadastrarPessoa.authPessoaComum(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, tela.getIdUser());
 					}
 					limparCampos(tela);
 				}

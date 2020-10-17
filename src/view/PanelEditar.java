@@ -103,19 +103,11 @@ public class PanelEditar extends JPanel {
 		lblQntFilhos.setBounds(20, 360, 192, 14);
 		add(lblQntFilhos);
 		
-		MaskFormatter masknumber;
-		try {
-			masknumber = new MaskFormatter("##");
-			formattedTextFieldFilhos = new JFormattedTextField(masknumber);
-			formattedTextFieldFilhos.setText(String.valueOf(pessoa.getQntFilhos()));
-			masknumber.setValidCharacters("0123456789");
-			formattedTextFieldFilhos.setColumns(10);
-			formattedTextFieldFilhos.setBounds(20, 390, 90, 30);
-			add(formattedTextFieldFilhos);
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		formattedTextFieldFilhos = new JFormattedTextField();
+		formattedTextFieldFilhos.setText(String.valueOf(pessoa.getQntFilhos()));
+		formattedTextFieldFilhos.setColumns(10);
+		formattedTextFieldFilhos.setBounds(20, 390, 90, 30);
+		add(formattedTextFieldFilhos);
 		
 		
 		try {
@@ -169,17 +161,11 @@ public class PanelEditar extends JPanel {
 		lblHoras.setBounds(410, 200, 163, 14);
 		add(lblHoras);
 		
-		try {
-			masknumber = new MaskFormatter("##");
-			formattedTextFieldHoras = new JFormattedTextField(masknumber);
-			formattedTextFieldHoras.setText(String.valueOf(pessoa.getHorasSemanaisContratadas()));
-			formattedTextFieldHoras.setColumns(10);
-			formattedTextFieldHoras.setBounds(410, 230, 90, 30);
-			add(formattedTextFieldHoras);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		formattedTextFieldHoras = new JFormattedTextField();
+		formattedTextFieldHoras.setText(String.valueOf(pessoa.getHorasSemanaisContratadas()));
+		formattedTextFieldHoras.setColumns(10);
+		formattedTextFieldHoras.setBounds(410, 230, 90, 30);
+		add(formattedTextFieldHoras);
 		if (pessoa.getTipo().equalsIgnoreCase("Horista"))rdbtnTipoHorista.setSelected(true);
 		else {
 			rdbtnTipoMensalista.setSelected(true);

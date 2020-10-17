@@ -5,7 +5,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import auth.AuthEditarMesDeReferencia;
+import dao.GenericDAO;
+import log.LogMesDeReferencia;
+import model.Pessoa;
 import view.PanelEditarMesDeReferencia;
 
 public class ControllerEditarMesDeReferencia {
@@ -21,9 +23,12 @@ public class ControllerEditarMesDeReferencia {
 				
 				if (JOptionPane.showConfirmDialog(null, "Tem certeza que deseja deletar essa vigência do IRRF?", "", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE)==0) {
 					
-					String vigenciaString = tela.getTextField().getText().intern();
+					GenericDAO.getMdrdao().remove(tela.getMes(), GenericDAO.getEmf());
 					
-					AuthEditarMesDeReferencia.authMesDeReferencia(vigenciaString, tela.getMes());
+					Pessoa pessoa = GenericDAO.getPdao().findID(tela.getUserId(), GenericDAO.getEmf());
+					LogMesDeReferencia.logDeletarMesDeReferencia(pessoa, tela.getMes());
+					
+					JOptionPane.showMessageDialog(null, "Vigência do mês de referência deletado com sucesso!");
 					
 				}
 				

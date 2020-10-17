@@ -16,6 +16,7 @@ import tabelasconfig.TabelaIRRF;
 import tabelasconfig.ValoresINSS;
 import tabelasconfig.ValoresIRRF;
 
+@SuppressWarnings("all")
 public class App {
 
 	public static void main(String[] args) {
