@@ -34,6 +34,7 @@ public class PanelCadastro extends JPanel {
 	private final ButtonGroup buttonGroup_2 = new ButtonGroup();
 	
 	private Long idUser;
+	private JFormattedTextField formattedTextFieldValorHora;
 
 	/**
 	 * Create the panel.
@@ -237,6 +238,18 @@ public class PanelCadastro extends JPanel {
 		add(rdbtnSindicalizadoNao);
 		
 		new ControllerCadastrar(this);
+		
+		JLabel lblValorHora = new JLabel("Valor Hora");
+		lblValorHora.setForeground(Color.WHITE);
+		lblValorHora.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 16));
+		lblValorHora.setBounds(608, 282, 163, 14);
+		add(lblValorHora);
+		
+		formattedTextFieldValorHora = new JFormattedTextField();
+		formattedTextFieldValorHora.setEnabled(false);
+		formattedTextFieldValorHora.setColumns(10);
+		formattedTextFieldValorHora.setBounds(608, 314, 90, 30);
+		add(formattedTextFieldValorHora);
 	}
 
 	public JTextField getTextFieldNome() {
@@ -306,12 +319,13 @@ public class PanelCadastro extends JPanel {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+
+	public JFormattedTextField getFormattedTextFieldValorHora() {
+		return formattedTextFieldValorHora;
+	}
 
 	public Long getIdUser() {
 		return idUser;
 	}
-	
-	
-	
-	
 }

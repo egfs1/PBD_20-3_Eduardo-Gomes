@@ -64,6 +64,9 @@ public class Pessoa implements Serializable{
 	private int horasSemanaisContratadas;
 	
 	@Column
+	private double valorHora;
+	
+	@Column
 	private String usuario;
 	
 	@Column
@@ -77,7 +80,7 @@ public class Pessoa implements Serializable{
 	
 	// Contrutor para adm e contador
 	public Pessoa(String nome, String naturalidade, int qntFilhos, Date dataNascimento, Date dataAdmissao,
-			boolean sindicalizado, String funcao, String tipo, int horasSemanaisContratadas, String usuario,
+			boolean sindicalizado, String funcao, String tipo, int horasSemanaisContratadas, double valorHora, String usuario,
 			String senha) {
 		this.nome = nome;
 		this.naturalidade = naturalidade;
@@ -88,13 +91,14 @@ public class Pessoa implements Serializable{
 		this.funcao = funcao;
 		this.tipo = tipo;
 		this.horasSemanaisContratadas = horasSemanaisContratadas;
+		this.valorHora = valorHora;
 		this.usuario = usuario;
 		this.senha = senha;
 	}
 	
 	// contrutor para funcionario comum
 	public Pessoa(String nome, String naturalidade, int qntFilhos, Date dataNascimento, Date dataAdmissao,
-			boolean sindicalizado, String funcao, String tipo, int horasSemanaisContratadas) {
+			boolean sindicalizado, String funcao, String tipo, int horasSemanaisContratadas, double valorHora) {
 		this.nome = nome;
 		this.naturalidade = naturalidade;
 		this.qntFilhos = qntFilhos;
@@ -104,6 +108,7 @@ public class Pessoa implements Serializable{
 		this.funcao = funcao;
 		this.tipo = tipo;
 		this.horasSemanaisContratadas = horasSemanaisContratadas;
+		this.valorHora = valorHora;
 	}
 
 
@@ -200,107 +205,22 @@ public class Pessoa implements Serializable{
 		return funcao;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+	public double getValorHora() {
+		return valorHora;
+	}
 
 
 	public void setFuncao(String funcao) {
 		this.funcao = funcao;
 	}
-
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dataAdmissao == null) ? 0 : dataAdmissao.hashCode());
-		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
-		result = prime * result + ((funcao == null) ? 0 : funcao.hashCode());
-		result = prime * result + horasSemanaisContratadas;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((naturalidade == null) ? 0 : naturalidade.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + qntFilhos;
-		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
-		result = prime * result + (sindicalizado ? 1231 : 1237);
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
-		return result;
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Pessoa other = (Pessoa) obj;
-		if (dataAdmissao == null) {
-			if (other.dataAdmissao != null)
-				return false;
-		} else if (!dataAdmissao.equals(other.dataAdmissao))
-			return false;
-		if (dataNascimento == null) {
-			if (other.dataNascimento != null)
-				return false;
-		} else if (!dataNascimento.equals(other.dataNascimento))
-			return false;
-		if (funcao == null) {
-			if (other.funcao != null)
-				return false;
-		} else if (!funcao.equals(other.funcao))
-			return false;
-		if (horasSemanaisContratadas != other.horasSemanaisContratadas)
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (naturalidade == null) {
-			if (other.naturalidade != null)
-				return false;
-		} else if (!naturalidade.equals(other.naturalidade))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (qntFilhos != other.qntFilhos)
-			return false;
-		if (senha == null) {
-			if (other.senha != null)
-				return false;
-		} else if (!senha.equals(other.senha))
-			return false;
-		if (sindicalizado != other.sindicalizado)
-			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
-				return false;
-		} else if (!tipo.equals(other.tipo))
-			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
-				return false;
-		} else if (!usuario.equals(other.usuario))
-			return false;
-		return true;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Pessoa [id=" + id + ", nome=" + nome + ", naturalidade=" + naturalidade + ", qntFilhos=" + qntFilhos
-				+ ", dataNascimento=" + dataNascimento + ", dataAdmissao=" + dataAdmissao + ", sindicalizado="
-				+ sindicalizado + ", funcao=" + funcao + ", tipo=" + tipo + ", horasSemanaisContratadas="
-				+ horasSemanaisContratadas + ", usuario=" + usuario + ", senha=" + senha + "]";
-	}
 	
 	public static int[] columnsSize() {
-		int[] array = {50, 200, 200, 100, 250, 250, 100, 200, 200, 100, 200, 400};
+		int[] array = {50, 200, 200, 100, 250, 250, 100, 200, 200, 100, 100, 200, 400};
 		return array;
 	}
 	

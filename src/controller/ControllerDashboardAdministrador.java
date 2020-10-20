@@ -39,6 +39,7 @@ import view.PanelEditarMesDeReferencia;
 import view.PanelEditarPerfil;
 import view.PanelEditarSalarioFamilia;
 import view.PanelEditarSalarioMinimo;
+import view.PanelGerarFolhaDePagamento;
 import view.PanelLogin;
 import view.PanelTabela;
 import view.PanelVariasTabelas;
@@ -378,6 +379,17 @@ public class ControllerDashboardAdministrador {
 				tela.mudarPanel(new PanelTabela(tableModel, "Log das Tabelas", Log.columnsSize()));
 				System.gc();
 				
+			}
+		});
+		
+		// FOLHA DE PAGAMENTO ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		tela.getMntmGerarFolhaPagamento().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tela.mudarPanel(new PanelGerarFolhaDePagamento(tela.getIDPessoa()));
+				System.gc();
 			}
 		});
 		

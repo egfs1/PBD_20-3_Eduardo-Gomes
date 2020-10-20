@@ -51,6 +51,7 @@ public class PanelDashboardAdministrador extends JPanel {
 	private JMenuItem mntmGerarBackup;
 
 	private JMenuItem mntmTabelaLog;
+	private JMenuItem mntmGerarFolhaPagamento;
 
 	
 	/**
@@ -148,9 +149,17 @@ public class PanelDashboardAdministrador extends JPanel {
 		mntmTabelaLog = new JMenuItem("Tabela Log");
 		mnTabelas.add(mntmTabelaLog);
 		
+		JMenu mnFolhaDePagamento = new JMenu("F. Pagamento");
+		mnFolhaDePagamento.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
+		mnFolhaDePagamento.setBounds(300,0,100, 32);
+		menuBar.add(mnFolhaDePagamento);
+		
+		mntmGerarFolhaPagamento = new JMenuItem("Gerar Folha de Pagamento");
+		mnFolhaDePagamento.add(mntmGerarFolhaPagamento);
+		
 		JMenu mnOpcoes = new JMenu("Op\u00E7\u00F5es");
 		mnOpcoes.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
-		mnOpcoes.setBounds(300,0,100, 32);
+		mnOpcoes.setBounds(400,0,100, 32);
 		menuBar.add(mnOpcoes);
 		
 		mntmGerarBackup = new JMenuItem("Gerar Backup");
@@ -278,6 +287,10 @@ public class PanelDashboardAdministrador extends JPanel {
 
 	public JMenuItem getMntmTabelaLog() {
 		return mntmTabelaLog;
+	}
+
+	public JMenuItem getMntmGerarFolhaPagamento() {
+		return mntmGerarFolhaPagamento;
 	}
 
 	public void mudarPanel(JPanel panel) {

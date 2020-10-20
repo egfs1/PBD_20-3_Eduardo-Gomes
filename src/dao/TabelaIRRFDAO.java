@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-import tabelasconfig.TabelaINSS;
 import tabelasconfig.TabelaIRRF;
 import tabelasconfig.ValoresIRRF;
 
@@ -88,7 +87,7 @@ public class TabelaIRRFDAO {
 	public boolean existeVigencia(TabelaIRRF t, EntityManagerFactory emf) {
 		try {
 			this.em = emf.createEntityManager();
-			Query query = em.createNamedQuery("TabelaIRRF.findByVigencia", TabelaINSS.class);
+			Query query = em.createNamedQuery("TabelaIRRF.findByVigencia", TabelaIRRF.class);
 			query.setParameter("vigencia", t.getVigencia());
 			boolean existe = query.getResultList().size() > 0;
 			em.close();

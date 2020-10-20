@@ -8,6 +8,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import controller.ControllerTela;
 import dao.GenericDAO;
+import folhadepagamento.GerarFolhaDePagamento;
 import model.Criptografar;
 import model.FormatarVigencia;
 import model.Pessoa;
@@ -35,7 +36,7 @@ public class App {
 			e.printStackTrace();
 		}
 //		
-//		Pessoa p = new Pessoa("eduardo", "brasileiro", 0, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), false, "Administrador", "Mensalista", 40, "admin", Criptografar.criptografar("admin"));
+//		Pessoa p = new Pessoa("eduardo", "brasileiro", 0, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), false, "Administrador", "Mensalista", 40, 0, "admin", Criptografar.criptografar("admin"));
 //		GenericDAO.getPdao().persist(p, GenericDAO.getEmf());
 		
 //		ValoresINSS v1 = new ValoresINSS(0, 1000, 0);

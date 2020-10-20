@@ -11,7 +11,7 @@ public class TabelaPessoaModel extends AbstractTableModel {
 	
 	private static final long serialVersionUID = 1L;
 	private List<Pessoa> dados = new ArrayList<>();
-	private String[] colunas = {"ID", "Nome", "Naturalidade", "N° Filhos", "Data de Nascimento", "Data de Admissão", "Sindicalizado", "Função", "Tipo", "Horas Semanais", "Usuario", "Senha"};
+	private String[] colunas = {"ID", "Nome", "Naturalidade", "N° Filhos", "Data de Nascimento", "Data de Admissão", "Sindicalizado", "Função", "Tipo", "Horas Semanais", "Valor Hora", "Usuario", "Senha"};
 	
 	public TabelaPessoaModel(List<Pessoa> dados) {
 		this.dados = dados;
@@ -69,9 +69,12 @@ public class TabelaPessoaModel extends AbstractTableModel {
 			return dados.get(rowIndex).getHorasSemanaisContratadas();
 			
 		case 10:
-			return dados.get(rowIndex).getUsuario();
+			return dados.get(rowIndex).getValorHora();
 			
 		case 11:
+			return dados.get(rowIndex).getUsuario();
+			
+		case 12:
 			return dados.get(rowIndex).getSenha();
 		}
 		return null;

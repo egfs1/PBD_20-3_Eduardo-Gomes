@@ -22,6 +22,8 @@ public class ControllerEditar {
 				tela.getFormattedTextFieldHoras().setText("");
 				tela.getFormattedTextFieldHoras().setEnabled(true);
 				
+				tela.getFormattedTextFieldValorHora().setText("");
+				tela.getFormattedTextFieldValorHora().setEnabled(true);
 			}
 		});
 		
@@ -31,6 +33,9 @@ public class ControllerEditar {
 			public void actionPerformed(ActionEvent e) {
 				tela.getFormattedTextFieldHoras().setText("40");
 				tela.getFormattedTextFieldHoras().setEnabled(false);
+				
+				tela.getFormattedTextFieldValorHora().setText("0");
+				tela.getFormattedTextFieldValorHora().setEnabled(false);
 			}
 		});
 		
@@ -78,15 +83,17 @@ public class ControllerEditar {
 				
 				String horasSemanaisString = tela.getFormattedTextFieldHoras().getText().intern();
 				
+				String valorHoraString = tela.getFormattedTextFieldValorHora().getText().intern();
+				
 				String usuario = tela.getTextFieldUsuario().getText().intern();
 				
 				String senha = tela.getPessoa().getSenha();
 				
 				if (funcao!="Comum") {
-					AuthEditarPessoa.authPessoaUsuario(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, usuario, senha, tela);
+					AuthEditarPessoa.authPessoaUsuario(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, valorHoraString, usuario, senha, tela);
 				}
 				else {
-					AuthEditarPessoa.authPessoaComum(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, tela);
+					AuthEditarPessoa.authPessoaComum(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, valorHoraString, tela);
 				}
 			}
 		});

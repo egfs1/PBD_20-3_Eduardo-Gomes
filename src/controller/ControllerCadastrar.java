@@ -51,6 +51,9 @@ public class ControllerCadastrar {
 				tela.getFormattedTextFieldHoras().setText("");
 				tela.getFormattedTextFieldHoras().setEnabled(true);
 				
+				tela.getFormattedTextFieldValorHora().setText("");
+				tela.getFormattedTextFieldValorHora().setEnabled(true);
+				
 			}
 		});
 		
@@ -60,6 +63,9 @@ public class ControllerCadastrar {
 			public void actionPerformed(ActionEvent e) {
 				tela.getFormattedTextFieldHoras().setText("40");
 				tela.getFormattedTextFieldHoras().setEnabled(false);
+				
+				tela.getFormattedTextFieldValorHora().setText("0");
+				tela.getFormattedTextFieldValorHora().setEnabled(false);
 			}
 		});
 		
@@ -106,14 +112,16 @@ public class ControllerCadastrar {
 				
 				String horasSemanaisString = tela.getFormattedTextFieldHoras().getText().intern();
 				
+				String valorHoraString = tela.getFormattedTextFieldValorHora().getText().intern();
+				
 				String usuario = tela.getTextFieldUsuario().getText().intern();
 				
 				if(allButtonsSelected) {
 					if (funcao!="Comum") {
-						AuthCadastrarPessoa.authPessoaUsuario(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, usuario, tela.getIdUser());
+						AuthCadastrarPessoa.authPessoaUsuario(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, valorHoraString, usuario, tela.getIdUser());
 					}
 					else {
-						AuthCadastrarPessoa.authPessoaComum(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, tela.getIdUser());
+						AuthCadastrarPessoa.authPessoaComum(nome, naturalidade, qntFilhosString, dataNascimentoString, dataAdmissao, sindicalizado, funcao, tipo, horasSemanaisString, valorHoraString, tela.getIdUser());
 					}
 					limparCampos(tela);
 				}

@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class GerarBackup {
 	
 	public static void fazBackup(){
-		String arquivo = "C:\\Users\\Pichau\\eclipse-workspace\\PBD_20-3_Eduardo-Gomes\\backup\\backup.sql";
+		String arquivo = "backup/backup.sql";
 		String diretorio = "C:\\Arquivos de Programas\\PostgreSQL\\12\\bin\\";
 		
 		File arq = new File(arquivo);

@@ -36,6 +36,7 @@ public class PanelEditar extends JPanel {
 	
 	private Pessoa pessoa;
 	private Long idUser;
+	private JFormattedTextField formattedTextFieldValorHora;
 	/**
 	 * Create the panel.
 	 */
@@ -224,6 +225,21 @@ public class PanelEditar extends JPanel {
 		else rdbtnSindicalizadoNao.setSelected(true);
 		
 		new ControllerEditar(this);
+		
+		JLabel lblValorHora = new JLabel("Valor Hora");
+		lblValorHora.setForeground(Color.WHITE);
+		lblValorHora.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 16));
+		lblValorHora.setBounds(615, 200, 163, 14);
+		add(lblValorHora);
+		
+		formattedTextFieldValorHora = new JFormattedTextField(pessoa.getValorHora());
+		formattedTextFieldValorHora.setColumns(10);
+		formattedTextFieldValorHora.setBounds(615, 232, 90, 30);
+		add(formattedTextFieldValorHora);
+		
+		if (pessoa.getTipo().equals("Mensalista")) {
+			formattedTextFieldValorHora.setEnabled(false);
+		}
 	}
 
 	public JTextField getTextFieldNome() {
@@ -281,6 +297,14 @@ public class PanelEditar extends JPanel {
 
 	public Long getIdUser() {
 		return idUser;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public JFormattedTextField getFormattedTextFieldValorHora() {
+		return formattedTextFieldValorHora;
 	}
 	
 	

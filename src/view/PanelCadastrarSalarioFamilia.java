@@ -36,7 +36,7 @@ public class PanelCadastrarSalarioFamilia extends JPanel {
 		setBounds(0, 32, 800, 568);
 		setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Nova Vig\u00EAncia do Salario Minimo");
+		JLabel lblNewLabel = new JLabel("Nova Vig\u00EAncia do Salario Fam\u00EDlia");
 		lblNewLabel.setOpaque(true);
 		lblNewLabel.setBackground(SystemColor.textHighlight);
 		lblNewLabel.setForeground(Color.WHITE);
