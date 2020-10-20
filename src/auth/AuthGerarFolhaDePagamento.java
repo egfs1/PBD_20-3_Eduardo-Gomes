@@ -66,10 +66,10 @@ public class AuthGerarFolhaDePagamento {
 		
 		if (newUsuario.getTipo().equals("Mensalista")) {
 			salarioBase = tabelaSalarioMinimo.getValor();
-		}else if (newUsuario.getHorasSemanaisContratadas()*newUsuario.getValorHora() < tabelaSalarioMinimo.getValor()) {
+		}else if (newUsuario.getHorasSemanaisContratadas()*newUsuario.getValorHora()*4 < tabelaSalarioMinimo.getValor()) {
 			salarioBase = tabelaSalarioMinimo.getValor();
 		}else {
-			salarioBase = newUsuario.getHorasSemanaisContratadas()*newUsuario.getValorHora();
+			salarioBase = newUsuario.getHorasSemanaisContratadas()*newUsuario.getValorHora()*4;
 		}
 		
 		// ADICIONAL TEMPO DE SERVICO

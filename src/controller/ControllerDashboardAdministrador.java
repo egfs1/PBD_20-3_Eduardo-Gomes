@@ -33,6 +33,7 @@ import view.PanelCadastrarSalarioMinimo;
 import view.PanelCadastro;
 import view.PanelDashboardAdministrador;
 import view.PanelEditar;
+import view.PanelEditarFolhaDePagamento;
 import view.PanelEditarINSS;
 import view.PanelEditarIRRF;
 import view.PanelEditarMesDeReferencia;
@@ -392,6 +393,16 @@ public class ControllerDashboardAdministrador {
 				System.gc();
 			}
 		});
+		
+		tela.getMntmEditarFolhaPagamento().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tela.mudarPanel(new PanelEditarFolhaDePagamento(tela.getIDPessoa()));
+				System.gc();
+			}
+		});
+		
 		
 		// OPÇÕES ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		

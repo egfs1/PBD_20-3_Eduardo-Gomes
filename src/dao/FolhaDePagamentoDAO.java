@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -100,6 +101,23 @@ public class FolhaDePagamentoDAO {
 		}
 		em.close();
 		return false;
+	}
+	
+	public FolhaDePagamento findByUserIdAndVigencia(Long user_id, Date vigencia, EntityManagerFactory emf) {
+		try {
+			this.em = emf.createEntityManager();
+			Query query = em.createNamedQuery("FolhaDePagamento.findByUserIdAndVigencia", FolhaDePagamento.class);
+			query.setParameter("user_id", user_id);
+			query.setParameter("vigencia", vigencia);
+			FolhaDePagamento folha = (FolhaDePagamento) query.getSingleResult();
+			em.close();
+			return folha;
+		}
+		catch (Exception e) {
+			em.close();
+		}
+		em.close();
+		return null;
 	}
 	
 	public List<FolhaDePagamento> findAll(EntityManagerFactory emf){

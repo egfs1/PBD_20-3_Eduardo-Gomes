@@ -53,6 +53,8 @@ public class PanelDashboardAdministrador extends JPanel {
 	private JMenuItem mntmTabelaLog;
 	private JMenuItem mntmGerarFolhaPagamento;
 
+	private JMenuItem mntmEditarFolhaPagamento;
+
 	
 	/**
 	 * Create the panel.
@@ -157,6 +159,9 @@ public class PanelDashboardAdministrador extends JPanel {
 		mntmGerarFolhaPagamento = new JMenuItem("Gerar Folha de Pagamento");
 		mnFolhaDePagamento.add(mntmGerarFolhaPagamento);
 		
+		mntmEditarFolhaPagamento = new JMenuItem("Editar Folha de Pagamento");
+		mnFolhaDePagamento.add(mntmEditarFolhaPagamento);
+		
 		JMenu mnOpcoes = new JMenu("Op\u00E7\u00F5es");
 		mnOpcoes.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 14));
 		mnOpcoes.setBounds(400,0,100, 32);
@@ -178,6 +183,10 @@ public class PanelDashboardAdministrador extends JPanel {
 		mnOpcoes.add(mntmSair);
 		
 		new ControllerDashboardAdministrador(this);
+	}
+
+	public JMenuItem getMntmEditarFolhaPagamento() {
+		return mntmEditarFolhaPagamento;
 	}
 
 	public JMenuItem getMntmDeslogar() {
